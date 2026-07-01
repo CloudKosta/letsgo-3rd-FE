@@ -1,7 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import { Home, ShoppingCart, Calendar, ClipboardList, MessageCircle } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
-const navItems = [
+interface NavItem {
+    path: string;
+    label: string;
+    Icon: LucideIcon;
+}
+
+const navItems: NavItem[] = [
     { path: '/', label: '홈', Icon: Home },
     { path: '/cart', label: '카트', Icon: ShoppingCart },
     { path: '/mySchedule', label: '내일정', Icon: Calendar },

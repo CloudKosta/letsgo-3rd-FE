@@ -1,9 +1,9 @@
-import Navbar from "./components/layout/NavBar";
+import PhoneLayout from "./components/layout/PhoneLayout";
 
 export default function App() {
   return (
     <>
-      <Navbar />
+      <PhoneLayout />
     </>
   );
 }
