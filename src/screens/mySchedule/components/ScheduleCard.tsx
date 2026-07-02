@@ -1,10 +1,10 @@
 import { Calendar, MapPin, Share2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import type { Schedule } from '../../../data/mockSchedules';
+import type { MySchedule } from '../../../types';
 import styles from './ScheduleCard.module.css';
 
 interface ScheduleCardProps {
-    schedule: Schedule;
+    schedule: MySchedule;
 }
 
 function ScheduleCard({ schedule }: ScheduleCardProps) {
@@ -13,11 +13,11 @@ function ScheduleCard({ schedule }: ScheduleCardProps) {
     return (
         <div
             className={styles.card}
-            onClick={() => navigate(`/mySchedule/${schedule.id}`)}
+            onClick={() => navigate(`/mySchedule/${schedule.myScheduleId}`)}
             style={{ cursor: 'pointer' }}
         >
             <div className={styles.header}>
-                <h3 className={styles.title}>{schedule.title}</h3>
+                <h3 className={styles.title}>{schedule.myScheduleTitle}</h3>
                 {schedule.isShared && (
                     <span className={styles.sharedBadge}>
                         <Share2 className={styles.sharedIcon} />
@@ -29,7 +29,7 @@ function ScheduleCard({ schedule }: ScheduleCardProps) {
             <div className={styles.meta}>
                 <span className={styles.metaItem}>
                     <Calendar className={styles.metaIcon} />
-                    {schedule.date}
+                    {schedule.startAt}
                 </span>
                 <span className={styles.metaItem}>
                     <MapPin className={styles.metaIcon} />
@@ -38,7 +38,7 @@ function ScheduleCard({ schedule }: ScheduleCardProps) {
             </div>
 
             <div className={styles.tagList}>
-                {schedule.tags.map((tag) => (
+                {schedule.placeTitle.map((tag) => (
                     <span key={tag} className={styles.tag}>
                         {tag}
                     </span>
