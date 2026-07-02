@@ -1,15 +1,16 @@
-import DropDown from "./DropDown";
-import PostScheduleDetail from "./PostScheduleDetail";
-import { TabButton } from "./TabButton";
+import DropDown from "./components/DropDown";
+import PostScheduleCard from "./components/PostScheduleCard";
+import {TabButton} from "./components/TabButton";
 
 
 
-export default function Main() {
+
+export default function PostScheduleApp() {
   return (
     <div>
       <DropDown />
       <TabButton />
-      <PostScheduleDetail />
+      <PostScheduleCard />
     </div>
   );
 }
