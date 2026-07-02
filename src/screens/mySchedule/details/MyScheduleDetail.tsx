@@ -7,6 +7,7 @@ import CalendarButton from './components/CalendarButton';
 import RouteMap from './components/RouteMap';
 import PlaceList from './components/PlaceList';
 import ShareTab from './components/ShareTab';
+import TodoTab from './components/TodoTab';
 import styles from './MyScheduleDetail.module.css';
 
 interface MyScheduleDetailProps {
@@ -22,6 +23,11 @@ function MyScheduleDetail({ schedule, details = [], companions = [] }: MySchedul
     if (!schedule) {
         return <div className={styles.notFound}>일정을 찾을 수 없습니다.</div>;
     }
+
+    const todoItems = details.filter((d) => d.todoDetail);
+    const todoContent = todoItems.length > 0
+        ? `<ul>${todoItems.map((d) => `<li><strong>${d.title}</strong>: ${d.todoDetail}</li>`).join('')}</ul>`
+        : '';
 
     return (
         <div className={styles.page}>
@@ -55,14 +61,7 @@ function MyScheduleDetail({ schedule, details = [], companions = [] }: MySchedul
                 )}
 
                 {activeTab === 'todo' && (
-                    <ul className={styles.infoList}>
-                        {details.map((d) => (
-                            <li key={d.visitId} className={styles.infoItem}>
-                                <span className={styles.infoTitle}>{d.title}</span>
-                                <span className={styles.infoText}>{d.todoDetail}</span>
-                            </li>
-                        ))}
-                    </ul>
+                    <TodoTab initialContent={todoContent} />
                 )}
 
                 {activeTab === 'share' && (
