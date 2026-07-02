@@ -7,9 +7,6 @@ import Cart from '../../screens/cart/Cart';
 import ChatBot from '../../screens/chatBot/ChatBot';
 
 function PhoneLayoutContent() {
-    const location = useLocation();
-
-
 
     return (
         <div className="flex flex-col h-screen">

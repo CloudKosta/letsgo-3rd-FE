@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Compass, Hotel, Utensils } from "lucide-react";
 import "./LookupTable.css";
 
 const CATEGORY_MAP = {
@@ -50,22 +51,46 @@ export default function LookupTable() {
 
     return (
         <div className="lookup-container">
-
-
             <div className="lookup-tabs">
-                <button onClick={() => handleTabChange('LEISURE')}>레저스포츠</button>
-                <button onClick={() => handleTabChange('STAY')}>숙소</button>
-                <button onClick={() => handleTabChange('RESTAURANT')}>음식점</button>
+                <button
+                    className={`lookup-tab ${currentTab === 'LEISURE' ? 'active' : ''}`}
+                    onClick={() => handleTabChange('LEISURE')}
+                >
+                    <Compass className="lookup-tab-icon" />
+                    레저스포츠
+                </button>
+                <button
+                    className={`lookup-tab ${currentTab === 'STAY' ? 'active' : ''}`}
+                    onClick={() => handleTabChange('STAY')}
+                >
+                    <Hotel className="lookup-tab-icon" />
+                    숙소
+                </button>
+                <button
+                    className={`lookup-tab ${currentTab === 'RESTAURANT' ? 'active' : ''}`}
+                    onClick={() => handleTabChange('RESTAURANT')}
+                >
+                    <Utensils className="lookup-tab-icon" />
+                    음식점
+                </button>
             </div>
 
             <div className="lookup-section">
                 <div className="lookup-section-title">중분류</div>
                 <div className="lookup-button-group">
-
-                    <button onClick={() => handleMajorSelect('')}>전체</button>
+                    <button
+                        className={`lookup-btn ${selectedMajor === '' ? 'active' : ''}`}
+                        onClick={() => handleMajorSelect('')}
+                    >
+                        전체
+                    </button>
 
                     {majorCategories.map((major) => (
-                        <button key={major} onClick={() => handleMajorSelect(major)}>
+                        <button
+                            key={major}
+                            className={`lookup-btn ${selectedMajor === major ? 'active' : ''}`}
+                            onClick={() => handleMajorSelect(major)}
+                        >
                             {major}
                         </button>
                     ))}
@@ -76,9 +101,18 @@ export default function LookupTable() {
                 <div className="lookup-section">
                     <div className="lookup-section-title">소분류</div>
                     <div className="lookup-button-group">
-                        <button onClick={() => setSelectedSub('')}>전체</button>
+                        <button
+                            className={`lookup-btn ${selectedSub === '' ? 'active' : ''}`}
+                            onClick={() => setSelectedSub('')}
+                        >
+                            전체
+                        </button>
                         {subCategories.map((sub) => (
-                            <button key={sub} onClick={() => handleSubSelect(sub)}>
+                            <button
+                                key={sub}
+                                className={`lookup-btn ${selectedSub === sub ? 'active' : ''}`}
+                                onClick={() => handleSubSelect(sub)}
+                            >
                                 {sub}
                             </button>
                         ))}
