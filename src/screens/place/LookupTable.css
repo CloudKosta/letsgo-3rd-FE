@@ -1,0 +1,21 @@
+@reference "../../index.css";
+
+.lookup-container {
+    @apply w-[400px] bg-white border shadow-md mx-auto my-6 rounded-xl p-4;
+}
+
+.lookup-tabs {
+    @apply flex gap-2 border-b pb-3 mb-4;
+}
+
+.lookup-section {
+    @apply mb-4;
+}
+
+.lookup-section-title {
+    @apply text-[10px] font-bold text-gray-400 mb-1;
+}
+
+.lookup-button-group {
+    @apply flex flex-wrap gap-1.5;
+}

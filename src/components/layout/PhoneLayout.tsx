@@ -11,6 +11,7 @@ function PhoneLayoutContent() {
 
     const hideDefaultHeader =
         location.pathname.startsWith('/cart') ||
+        location.pathname.startsWith('/chat') ||
         /^\/mySchedule\/\d+/.test(location.pathname);
 
     return (

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./LookupTable.css";
 
 const CATEGORY_MAP = {
     LEISURE: {
@@ -48,18 +49,18 @@ export default function LookupTable() {
 
 
     return (
-        <div className="w-[400px] bg-white border shadow-md mx-auto my-6 rounded-xl p-4">
+        <div className="lookup-container">
 
 
-            <div className="flex gap-2 border-b pb-3 mb-4">
+            <div className="lookup-tabs">
                 <button onClick={() => handleTabChange('LEISURE')}>레저스포츠</button>
                 <button onClick={() => handleTabChange('STAY')}>숙소</button>
                 <button onClick={() => handleTabChange('RESTAURANT')}>음식점</button>
             </div>
 
-            <div className="mb-4">
-                <div className="text-[10px] font-bold text-gray-400 mb-1">중분류</div>
-                <div className="flex flex-wrap gap-1.5">
+            <div className="lookup-section">
+                <div className="lookup-section-title">중분류</div>
+                <div className="lookup-button-group">
 
                     <button onClick={() => handleMajorSelect('')}>전체</button>
 
@@ -72,9 +73,9 @@ export default function LookupTable() {
             </div>
 
             {selectedMajor && subCategories.length > 0 && (
-                <div className="mb-4">
-                    <div className="text-[10px] font-bold text-gray-400 mb-1">소분류</div>
-                    <div className="flex flex-wrap gap-1.5">
+                <div className="lookup-section">
+                    <div className="lookup-section-title">소분류</div>
+                    <div className="lookup-button-group">
                         <button onClick={() => setSelectedSub('')}>전체</button>
                         {subCategories.map((sub) => (
                             <button key={sub} onClick={() => handleSubSelect(sub)}>
@@ -87,3 +88,4 @@ export default function LookupTable() {
         </div>
     );
 }
+
