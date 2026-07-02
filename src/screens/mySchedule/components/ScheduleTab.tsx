@@ -1,4 +1,4 @@
-import styles from './ScheduleTab.module.css';
+import styles from './css/ScheduleTab.module.css';
 
 type TabType = 'all' | 'shared';
 

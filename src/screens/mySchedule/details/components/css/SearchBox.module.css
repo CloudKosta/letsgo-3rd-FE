@@ -1,0 +1,41 @@
+@reference "tailwindcss";
+
+.box {
+    @apply flex items-center gap-2 w-full;
+}
+
+.field {
+    @apply flex items-center gap-2 flex-1 min-w-0 rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 transition-colors duration-200;
+}
+
+.field:focus-within {
+    @apply border-blue-400 bg-white ring-2 ring-blue-100;
+}
+
+.searchIcon {
+    @apply w-4 h-4 shrink-0 text-gray-400;
+}
+
+.input {
+    @apply flex-1 min-w-0 bg-transparent border-none outline-none text-sm text-gray-900 placeholder:text-gray-400;
+}
+
+.clearBtn {
+    @apply shrink-0 flex items-center justify-center border-none bg-transparent cursor-pointer text-gray-400 p-0 transition-colors duration-150;
+}
+
+.clearBtn:hover {
+    @apply text-gray-600;
+}
+
+.clearIcon {
+    @apply w-4 h-4;
+}
+
+.submitBtn {
+    @apply shrink-0 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white border-none cursor-pointer transition-colors duration-200;
+}
+
+.submitBtn:hover {
+    @apply bg-blue-700;
+}

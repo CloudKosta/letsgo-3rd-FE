@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
-import styles from './SortDropdown.module.css';
+import { useClickOutside } from '../../../hooks/useClickOutside';
+import styles from './css/SortDropdown.module.css';
 
 export interface SortOption {
     key: string;
@@ -21,19 +22,11 @@ interface SortDropdownProps {
     onSortChange: (option: SortOption) => void;
 }
 
-function SortDropdown({ activeSort, onSortChange }: SortDropdownProps) {
+function SortDropdown(props: SortDropdownProps) {
     const [open, setOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const handleClickOutside = (e: MouseEvent) => {
-            if (ref.current && !ref.current.contains(e.target as Node)) {
-                setOpen(false);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+    useClickOutside(ref, () => setOpen(false));
 
     return (
         <div className={styles.wrapper}>
@@ -42,7 +35,7 @@ function SortDropdown({ activeSort, onSortChange }: SortDropdownProps) {
                     onClick={() => setOpen((prev) => !prev)}
                     className={styles.trigger}
                 >
-                    {activeSort.label}
+                    {props.activeSort.label}
                     <ChevronDown className={`${styles.chevron} ${open ? styles.chevronOpen : ''}`} />
                 </button>
 
@@ -52,10 +45,10 @@ function SortDropdown({ activeSort, onSortChange }: SortDropdownProps) {
                             <button
                                 key={option.key}
                                 onClick={() => {
-                                    onSortChange(option);
+                                    props.onSortChange(option);
                                     setOpen(false);
                                 }}
-                                className={`${styles.menuItem} ${activeSort.key === option.key ? styles.menuItemActive : ''}`}
+                                className={`${styles.menuItem} ${props.activeSort.key === option.key ? styles.menuItemActive : ''}`}
                             >
                                 {option.label}
                             </button>

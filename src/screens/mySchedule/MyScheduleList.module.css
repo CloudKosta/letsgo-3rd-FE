@@ -24,6 +24,14 @@
     @apply w-5 h-5 text-white;
 }
 
+.filterRow {
+    @apply px-5 pb-3 flex items-center gap-2;
+}
+
+.searchCell {
+    @apply flex-1 min-w-0;
+}
+
 .list {
     @apply flex-1 overflow-y-auto px-5 pb-4 flex flex-col gap-3;
 }
