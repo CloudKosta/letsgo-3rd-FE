@@ -1,0 +1,49 @@
+@reference "tailwindcss";
+
+.page {
+    @apply flex flex-col min-h-0 flex-1;
+}
+
+.dateRow {
+    @apply flex items-center justify-between px-5 py-3;
+}
+
+.deleteBtn {
+    @apply flex items-center gap-1 text-xs font-semibold text-red-500 border-none bg-transparent cursor-pointer transition-colors duration-200;
+}
+
+.deleteBtn:hover {
+    @apply text-red-600;
+}
+
+.deleteIcon {
+    @apply w-4 h-4;
+}
+
+.content {
+    @apply flex-1 overflow-y-auto px-5 py-4;
+}
+
+.section {
+    @apply flex flex-col gap-4;
+}
+
+.infoList {
+    @apply flex flex-col gap-2 list-none p-0 m-0;
+}
+
+.infoItem {
+    @apply flex flex-col gap-1 bg-white rounded-xl border border-gray-200 px-4 py-3 shadow-sm;
+}
+
+.infoTitle {
+    @apply text-sm font-semibold text-gray-900;
+}
+
+.infoText {
+    @apply text-sm text-gray-600;
+}
+
+.notFound {
+    @apply flex items-center justify-center py-16 text-sm text-gray-400;
+}

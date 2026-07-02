@@ -7,15 +7,21 @@ import SortDropdown from './components/SortDropdown';
 import { sortOptions } from './components/SortDropdown';
 import type { SortOption } from './components/SortDropdown';
 import ScheduleCard from './components/ScheduleCard';
+import SearchBox from './details/components/SearchBox';
 import styles from './MyScheduleList.module.css';
 
 function MyScheduleList() {
     const [activeTab, setActiveTab] = useState<TabType>('all');
     const [activeSort, setActiveSort] = useState<SortOption>(sortOptions[0]);
+    const [keyword, setKeyword] = useState('');
+    const [submittedQuery, setSubmittedQuery] = useState('');
 
-    const filtered = activeTab === 'shared'
-        ? mockSchedules.filter((s) => s.isShared)
-        : mockSchedules;
+    const query = submittedQuery.trim().toLowerCase();
+    const filtered = mockSchedules.filter((s) => {
+        if (activeTab === 'shared' && !s.isShared) return false;
+        if (query && !s.myScheduleTitle.toLowerCase().includes(query)) return false;
+        return true;
+    });
 
     const sorted = [...filtered].sort((a, b) => {
         let cmp = 0;
@@ -34,7 +40,18 @@ function MyScheduleList() {
             </div>
 
             <ScheduleTab activeTab={activeTab} onTabChange={setActiveTab} />
-            <SortDropdown activeSort={activeSort} onSortChange={setActiveSort} />
+
+            <div className={styles.filterRow}>
+                <div className={styles.searchCell}>
+                    <SearchBox
+                        value={keyword}
+                        onChange={setKeyword}
+                        onSearch={setSubmittedQuery}
+                        placeholder="일정 이름으로 검색"
+                    />
+                </div>
+                <SortDropdown activeSort={activeSort} onSortChange={setActiveSort} />
+            </div>
 
             <div className={styles.list}>
                 {sorted.map((schedule) => (

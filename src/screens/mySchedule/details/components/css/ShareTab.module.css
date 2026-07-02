@@ -1,0 +1,77 @@
+@reference "tailwindcss";
+
+.wrapper {
+    @apply flex flex-col gap-4;
+}
+
+.card {
+    @apply bg-white rounded-2xl border border-gray-200 p-4 shadow-sm flex flex-col gap-3;
+}
+
+.cardHeader {
+    @apply flex items-center justify-between;
+}
+
+.cardTitle {
+    @apply text-sm font-bold text-gray-900;
+}
+
+.addBtn {
+    @apply flex items-center gap-1 text-xs font-semibold text-blue-600 border border-blue-200 rounded-full px-3 py-1.5 bg-blue-50 cursor-pointer transition-colors duration-200;
+}
+
+.addBtn:hover {
+    @apply bg-blue-100;
+}
+
+.addIcon {
+    @apply w-3.5 h-3.5;
+}
+
+.empty {
+    @apply text-sm text-gray-400 py-2;
+}
+
+.companionList {
+    @apply flex flex-col gap-2 list-none p-0 m-0;
+}
+
+.companion {
+    @apply flex items-center gap-3;
+}
+
+.avatar {
+    @apply w-8 h-8 shrink-0 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-sm font-bold flex items-center justify-center;
+}
+
+.name {
+    @apply flex-1 text-sm font-medium text-gray-900 truncate;
+}
+
+.permission {
+    @apply text-xs font-semibold text-gray-500 bg-gray-100 rounded-full px-2.5 py-1;
+}
+
+.checkboxRow {
+    @apply flex items-center gap-2 text-sm text-gray-700 cursor-pointer select-none;
+}
+
+.checkbox {
+    @apply w-4 h-4 accent-blue-600 cursor-pointer;
+}
+
+.publishBtn {
+    @apply flex items-center justify-center gap-1.5 w-full py-3 rounded-xl bg-blue-600 text-white text-sm font-semibold border-none cursor-pointer transition-colors duration-200;
+}
+
+.publishBtn:hover:not(:disabled) {
+    @apply bg-blue-700;
+}
+
+.publishBtn:disabled {
+    @apply opacity-60 cursor-not-allowed;
+}
+
+.publishIcon {
+    @apply w-4 h-4;
+}
