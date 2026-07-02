@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import Navbar from './NavBar';
 import MyScheduleLayout from '../../screens/mySchedule/MyScheduleLayout';
