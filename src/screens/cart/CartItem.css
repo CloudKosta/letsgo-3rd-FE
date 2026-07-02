@@ -1,0 +1,29 @@
+@reference "../../index.css";
+
+.cart-item-container {
+    @apply flex items-center w-full max-w-[460px] bg-white border border-gray-200 shadow mx-auto my-8 rounded-md p-3 gap-4;
+}
+
+.cart-item-image-wrapper {
+    @apply w-[100px] h-[100px] shrink-0 flex items-center justify-center bg-gray-50 rounded-md;
+}
+
+.cart-item-image {
+    @apply w-full h-full object-contain rounded-md;
+}
+
+.cart-item-info-container {
+    @apply flex-1 flex justify-between items-center min-w-0;
+}
+
+.cart-item-title {
+    @apply text-xl font-bold text-gray-700 mb-1;
+}
+
+.cart-item-category {
+    @apply text-sm font-bold text-gray-400;
+}
+
+.cart-item-remove-button {
+    @apply text-gray-400 hover:text-gray-600 shrink-0 p-1;
+}
