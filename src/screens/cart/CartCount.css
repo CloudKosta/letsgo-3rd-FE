@@ -1,0 +1,17 @@
+@reference "../../index.css";
+
+.cart-count-container {
+    @apply flex items-center w-full max-w-[460px] bg-white border border-gray-200 shadow mx-auto my-8 rounded-md p-3 gap-4;
+}
+
+.cart-count-info {
+    @apply flex-1 flex justify-between items-center min-w-0;
+}
+
+.cart-count-label {
+    @apply text-sm font-bold text-gray-400;
+}
+
+.cart-count-value {
+    @apply text-sm font-bold text-gray-400;
+}

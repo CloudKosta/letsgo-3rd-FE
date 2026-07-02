@@ -1,0 +1,5 @@
+@reference "../../index.css";
+
+.schedule-button {
+    @apply flex items-center justify-center w-full max-w-[460px] bg-[#f88f46] hover:bg-[#e07b34] active:bg-[#c96c2a] border border-[#f88f46] shadow-sm mx-auto my-8 rounded-md p-4 gap-4 font-medium text-white cursor-pointer transition-colors duration-200;
+}

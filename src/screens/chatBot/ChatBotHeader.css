@@ -1,0 +1,9 @@
+@reference "../../index.css";
+
+.chatbot-header {
+    @apply fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 px-4 flex items-center justify-between z-50;
+}
+
+.chatbot-header-logo {
+    @apply font-bold text-xl tracking-tight text-blue-600;
+}
