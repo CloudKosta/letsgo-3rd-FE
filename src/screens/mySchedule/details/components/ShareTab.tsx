@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UserPlus, Send } from 'lucide-react';
 import type { Colleague } from '../../../../types';
 import { publishToSharedBoard } from '../../../../api/shareApi';
+import { getCompanions } from '../../../../api/myScheduleApi';
 import styles from './css/ShareTab.module.css';
 
 interface ShareTabProps {
     myScheduleId: number;
-    companions: Colleague[];
 }
 
 const permissionLabel: Record<string, string> = {
@@ -15,9 +15,24 @@ const permissionLabel: Record<string, string> = {
     VIEWER: '보기 가능',
 };
 
-function ShareTab({ myScheduleId, companions }: ShareTabProps) {
+function ShareTab({ myScheduleId }: ShareTabProps) {
+    const [companions, setCompanions] = useState<Colleague[]>([]);
     const [isAnonymous, setIsAnonymous] = useState(false);
     const [publishing, setPublishing] = useState(false);
+
+    useEffect(() => {
+        let ignore = false;
+        getCompanions(myScheduleId)
+            .then((data) => {
+                if (!ignore) setCompanions(data);
+            })
+            .catch(() => {
+                if (!ignore) setCompanions([]);
+            });
+        return () => {
+            ignore = true;
+        };
+    }, [myScheduleId]);
 
     const handlePublish = async () => {
         setPublishing(true);

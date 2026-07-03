@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import {
@@ -20,14 +20,16 @@ import styles from './css/TodoTab.module.css';
 
 interface TodoTabProps {
     initialContent?: string;
+    onSave?: (content: string) => Promise<void> | void;
 }
 
-function TodoTab({ initialContent = '' }: TodoTabProps) {
+function TodoTab({ initialContent = '', onSave }: TodoTabProps) {
     const editor = useEditor({
         extensions: [StarterKit],
         content: initialContent,
     });
 
+    const [saving, setSaving] = useState(false);
     const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
     useEffect(() => {
@@ -41,6 +43,15 @@ function TodoTab({ initialContent = '' }: TodoTabProps) {
     if (!editor) return null;
 
     const chain = () => editor.chain().focus();
+
+    const handleSave = async () => {
+        setSaving(true);
+        try {
+            await onSave?.(editor.getHTML());
+        } finally {
+            setSaving(false);
+        }
+    };
 
     const tools = [
         { key: 'h1', icon: Heading1, label: '제목 1', run: () => chain().toggleHeading({ level: 1 }).run(), active: editor.isActive('heading', { level: 1 }) },
@@ -100,6 +111,19 @@ function TodoTab({ initialContent = '' }: TodoTabProps) {
             </div>
 
             <EditorContent editor={editor} className={styles.editor} />
+
+            {onSave && (
+                <div className="flex justify-end mt-3">
+                    <button
+                        type="button"
+                        onClick={handleSave}
+                        disabled={saving}
+                        className="px-5 py-2.5 rounded-2xl bg-[#ff7a00] text-white text-sm font-bold shadow-sm active:scale-[0.98] disabled:opacity-60"
+                    >
+                        {saving ? '저장 중...' : '저장'}
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
