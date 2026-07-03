@@ -1,25 +1,14 @@
 import { useState } from "react";
-import Input from "./Input";
-import Button from "./Button";
+import { Link } from "react-router-dom";
+import Input from "./components/Input";
+import Button from "./components/Button";
 
 interface LoginProps {
     errorMessage?: string;
-    
     onSubmit?: (userID: string, password: string) => void;
-    onClickGoogleLogin?: () => void;
-    onClickGetId?: () => void;
-    onClickUpdatePw?: () => void;
-    onClickSignup?: () => void;
 }
 
-function Login({
-    errorMessage,
-    onSubmit,
-    onClickGoogleLogin,
-    onClickGetId,
-    onClickUpdatePw,
-    onClickSignup,
-}: LoginProps) {
+function Login({ errorMessage, onSubmit }: LoginProps) {
     const [userID, setUserID] = useState("");
     const [password, setPassword] = useState("");
 
@@ -66,18 +55,18 @@ function Login({
             </form>
 
             <div className="flex flex-wrap justify-center gap-x-3.5 gap-y-1.5 mt-5 text-[13px]">
-                <a onClick={onClickGoogleLogin} className="text-[#868e96] font-medium cursor-pointer hover:text-[#ff7a00]">
+                <a href="/oauth2/authorization/google" className="text-[#868e96] font-medium hover:text-[#ff7a00]">
                     구글로 로그인
                 </a>
-                <a onClick={onClickGetId} className="text-[#868e96] font-medium cursor-pointer hover:text-[#ff7a00]">
+                <Link to="/user/getid" className="text-[#868e96] font-medium hover:text-[#ff7a00]">
                     아이디 찾기
-                </a>
-                <a onClick={onClickUpdatePw} className="text-[#868e96] font-medium cursor-pointer hover:text-[#ff7a00]">
+                </Link>
+                <Link to="/user/updatepw" className="text-[#868e96] font-medium hover:text-[#ff7a00]">
                     비밀번호 찾기
-                </a>
-                <a onClick={onClickSignup} className="text-[#868e96] font-medium cursor-pointer hover:text-[#ff7a00]">
+                </Link>
+                <Link to="/user/signup" className="text-[#868e96] font-medium hover:text-[#ff7a00]">
                     회원가입
-                </a>
+                </Link>
             </div>
         </div>
     );

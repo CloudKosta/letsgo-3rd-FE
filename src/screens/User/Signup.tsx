@@ -1,6 +1,8 @@
 import { useState } from "react";
-import Input from "./Input";
-import Button from "./Button";
+import { Link, useNavigate } from "react-router-dom";
+import Input from "./components/Input";
+import Button from "./components/Button";
+
 
 interface SignupData {
     name: string;
@@ -10,18 +12,19 @@ interface SignupData {
 }
 
 interface SignupProps {
-    onSubmit?: (data: SignupData) => void;
-    onClickLogin?: () => void;
+    // 반환 프로미스를 await 해서, 서버 응답이 온 뒤에 로그인 화면으로 이동시킴
+    onSubmit?: (data: SignupData) => Promise<void> | void;
 }
 
-function Signup({ onSubmit, onClickLogin }: SignupProps) {
+function Signup({ onSubmit }: SignupProps) {
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [userID, setUserID] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (
@@ -39,7 +42,9 @@ function Signup({ onSubmit, onClickLogin }: SignupProps) {
             return;
         }
 
-        onSubmit?.({ name, userID, email, password });
+        await onSubmit?.({ name, userID, email, password });
+        // 가입 완료 후 로그인 화면으로 라우팅 이동
+        navigate("/user/login");
     };
 
     return (
@@ -96,9 +101,9 @@ function Signup({ onSubmit, onClickLogin }: SignupProps) {
             </form>
 
             <div className="flex flex-wrap justify-center gap-x-3.5 gap-y-1.5 mt-5 text-[13px]">
-                <a onClick={onClickLogin} className="text-[#868e96] font-medium cursor-pointer hover:text-[#ff7a00]">
+                <Link to="/user/login" className="text-[#868e96] font-medium hover:text-[#ff7a00]">
                     로그인
-                </a>
+                </Link>
             </div>
         </div>
     );

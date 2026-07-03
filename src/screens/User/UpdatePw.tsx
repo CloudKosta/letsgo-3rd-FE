@@ -1,6 +1,7 @@
 import { useState } from "react";
-import Input from "./Input";
-import Button from "./Button";
+import { Link, useNavigate } from "react-router-dom";
+import Input from "./components/Input";
+import Button from "./components/Button";
 
 interface UpdatePwData {
     userID: string;
@@ -9,17 +10,17 @@ interface UpdatePwData {
 }
 
 interface UpdatePwProps {
-    onSubmit?: (data: UpdatePwData) => void;
-    onClickLogin?: () => void;
+    onSubmit?: (data: UpdatePwData) => Promise<void> | void;
 }
 
-function UpdatePw({ onSubmit, onClickLogin }: UpdatePwProps) {
+function UpdatePw({ onSubmit }: UpdatePwProps) {
+    const navigate = useNavigate();
     const [userID, setUserID] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (
@@ -36,7 +37,8 @@ function UpdatePw({ onSubmit, onClickLogin }: UpdatePwProps) {
             return;
         }
 
-        onSubmit?.({ userID, email, password });
+        await onSubmit?.({ userID, email, password });
+        navigate("/user/login");
     };
 
     return (
@@ -85,9 +87,9 @@ function UpdatePw({ onSubmit, onClickLogin }: UpdatePwProps) {
             </form>
 
             <div className="flex flex-wrap justify-center gap-x-3.5 gap-y-1.5 mt-5 text-[13px]">
-                <a onClick={onClickLogin} className="text-[#868e96] font-medium cursor-pointer hover:text-[#ff7a00]">
+                <Link to="/user/login" className="text-[#868e96] font-medium hover:text-[#ff7a00]">
                     로그인
-                </a>
+                </Link>
             </div>
         </div>
     );

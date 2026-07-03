@@ -5,6 +5,7 @@ import MyScheduleLayout from '../../screens/mySchedule/MyScheduleLayout';
 import Place from '../../screens/place/Place';
 import Cart from '../../screens/cart/Cart';
 import ChatBot from '../../screens/chatBot/ChatBot';
+import UserApp from '../../screens/User/UserApp';
 
 function PhoneLayoutContent() {
 
@@ -18,6 +19,7 @@ function PhoneLayoutContent() {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/mySchedule/*" element={<MyScheduleLayout />} />
                     <Route path="/chat" element={<ChatBot />} />
+                    <Route path="/user/*" element={<UserApp />} />
                 </Routes>
             </main>
 

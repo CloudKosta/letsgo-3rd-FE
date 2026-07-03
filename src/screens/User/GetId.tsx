@@ -1,14 +1,14 @@
 import { useState } from "react";
-import Input from "./Input";
-import Button from "./Button";
+import { Link } from "react-router-dom";
+import Input from "./components/Input";
+import Button from "./components/Button";
+
 
 interface GetIdProps {
-    // 서버 통신은 상위에서 처리 -> 조회된 아이디 문자열을 반환하는 콜백
     onSubmit?: (name: string, email: string) => Promise<string>;
-    onClickLogin?: () => void;
 }
 
-function GetId({ onSubmit, onClickLogin }: GetIdProps) {
+function GetId({ onSubmit }: GetIdProps) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [foundId, setFoundId] = useState<string | null>(null);
@@ -76,9 +76,9 @@ function GetId({ onSubmit, onClickLogin }: GetIdProps) {
             )}
 
             <div className="flex flex-wrap justify-center gap-x-3.5 gap-y-1.5 mt-5 text-[13px]">
-                <a onClick={onClickLogin} className="text-[#868e96] font-medium cursor-pointer hover:text-[#ff7a00]">
+                <Link to="/user/login" className="text-[#868e96] font-medium hover:text-[#ff7a00]">
                     로그인
-                </a>
+                </Link>
             </div>
         </div>
     );
