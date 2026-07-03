@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Trash2 } from 'lucide-react';
 import type { ScheduleDetailInfo, RouteSchedule } from '../../../types';
@@ -27,11 +27,6 @@ function MyScheduleDetail({ scheduleId, info, route = [], permission, loading, e
     const navigate = useNavigate();
     const { saveTodo, saveBudget, saveStartAt, removeSchedule } = useScheduleMutations(scheduleId);
     const [activeTab, setActiveTab] = useState<DetailTabType>('schedule');
-    const [date, setDate] = useState('');
-
-    useEffect(() => {
-        if (info) setDate(info.startAt);
-    }, [info]);
 
     if (loading) {
         return <div className={styles.notFound}>불러오는 중...</div>;
@@ -47,11 +42,12 @@ function MyScheduleDetail({ scheduleId, info, route = [], permission, loading, e
     const canEdit = isOwner || permission === 'W';
 
     const handleDateChange = async (next: string) => {
-        setDate(next);
+        const prev = info.startAt;
+        patchInfo?.({ startAt: next });
         try {
             await saveStartAt(next);
-            patchInfo?.({ startAt: next });
         } catch (err) {
+            patchInfo?.({ startAt: prev });
             alert(err instanceof Error ? err.message : '날짜 저장에 실패했습니다.');
         }
     };
@@ -105,7 +101,7 @@ function MyScheduleDetail({ scheduleId, info, route = [], permission, loading, e
             )}
 
             <div className={styles.dateRow}>
-                <CalendarButton date={date} onDateChange={handleDateChange} disabled={!canEdit} />
+                <CalendarButton date={info.startAt} onDateChange={handleDateChange} disabled={!canEdit} />
                 {isOwner && (
                     <button className={styles.deleteBtn} onClick={handleDelete}>
                         <Trash2 className={styles.deleteIcon} />
