@@ -1,42 +1,30 @@
-import { useState } from "react";
+import "./TabButton.css";
 
-interface ListSwitchBtn {
-  activatedTab: string;
-  activatedTabHandler: (inputValue: string) => void;
+export type PostTabType = "all" | "mine";
+
+interface TabButtonProps {
+  activeTab: PostTabType;
+  onTabChange: (tab: PostTabType) => void;
 }
 
-export function TabButton (){
-    const [activatedTab, setActivatedTab] = useState("all");
-    const activatedTabHandler = (inputValue: string) => {
-        setActivatedTab(inputValue);
-    };
-    return(
-        <ListSwitchBtn activatedTab={activatedTab} activatedTabHandler={activatedTabHandler} />
-    );
-}
-
-const ListSwitchBtn = ({ activatedTabHandler, activatedTab }: ListSwitchBtn) => {
+export function TabButton({ activeTab, onTabChange }: TabButtonProps) {
   return (
-    <div className="flex rounded-full bg-gray-100 p-1 w-64">
-      <button
-        value="all"
-        onClick={(e) => activatedTabHandler(e.currentTarget.value)}
-        className={`text-sm flex-1 py-2 rounded-full text-center transition-all ${
-          activatedTab === "all" ? "bg-white font-bold shadow" : "text-gray-500"
-        }`}
-      >
-        전체게시물
-      </button>
+    <div className="post-tab-wrapper">
+      <div className="post-tab-group">
+        <button
+          onClick={() => onTabChange("all")}
+          className={`post-tab ${activeTab === "all" ? "post-tab-active" : ""}`}
+        >
+          전체게시물
+        </button>
 
-      <button
-        value="mine"
-        onClick={(e) => activatedTabHandler(e.currentTarget.value)}
-        className={`text-sm flex-1 py-2 rounded-full text-center transition-all ${
-          activatedTab === "mine" ? "bg-white font-bold shadow" : "text-gray-500"
-        }`}
-      >
-        내가 올린 게시물
-      </button>
+        <button
+          onClick={() => onTabChange("mine")}
+          className={`post-tab ${activeTab === "mine" ? "post-tab-active" : ""}`}
+        >
+          내가 올린 게시물
+        </button>
+      </div>
     </div>
   );
-};
+}

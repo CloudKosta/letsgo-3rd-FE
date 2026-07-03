@@ -1,0 +1,21 @@
+@reference "tailwindcss";
+
+.post-tab-wrapper {
+    @apply px-5 pb-3;
+}
+
+.post-tab-group {
+    @apply flex bg-gray-100 rounded-full p-1;
+}
+
+.post-tab {
+    @apply flex-1 py-2.5 text-sm font-semibold rounded-full border-none cursor-pointer transition-all duration-300 bg-transparent text-gray-500;
+}
+
+.post-tab:hover {
+    @apply text-gray-700;
+}
+
+.post-tab-active {
+    @apply bg-white text-gray-900 shadow-sm;
+}

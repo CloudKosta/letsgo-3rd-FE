@@ -1,0 +1,41 @@
+@reference "tailwindcss";
+
+.post-dropdown-wrapper {
+  @apply shrink-0 flex justify-end;
+}
+
+.post-dropdown-container {
+  @apply relative;
+}
+
+.post-dropdown-trigger {
+  @apply flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-full border border-gray-200 bg-white text-gray-700 cursor-pointer transition-all duration-200;
+}
+
+.post-dropdown-trigger:hover {
+  @apply border-gray-400;
+}
+
+.post-dropdown-chevron {
+  @apply text-xs transition-transform duration-200;
+}
+
+.post-dropdown-chevron-open {
+  @apply rotate-180;
+}
+
+.post-dropdown-menu {
+  @apply absolute right-0 mt-1.5 w-40 bg-white rounded-xl border border-gray-100 shadow-[0_4px_16px_rgba(0,0,0,0.08)] py-1 z-10;
+}
+
+.post-dropdown-menu-item {
+  @apply w-full text-left px-4 py-2.5 text-xs border-none bg-transparent text-gray-600 cursor-pointer transition-colors duration-150;
+}
+
+.post-dropdown-menu-item:hover {
+  @apply bg-gray-50;
+}
+
+.post-dropdown-menu-item-active {
+  @apply bg-gray-50 text-gray-900 font-semibold;
+}

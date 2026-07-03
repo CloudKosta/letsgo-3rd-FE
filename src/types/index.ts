@@ -21,6 +21,21 @@ export interface MyScheduleDetail {
     scheduleType: string;
 }
 
+export interface PostSchedule {
+    postId: number;
+    postTitle: string;
+    scheduleTitle: string;
+    author: string;
+    anonymous: boolean;
+    createdAt: string;
+    startAt: string;
+    placeCount: number;
+    placeTitles: string[];
+    viewCount: number;
+    likeCount: number;
+    isMine: boolean;
+}
+
 export interface Colleague {
     userId: string;
     name: string;

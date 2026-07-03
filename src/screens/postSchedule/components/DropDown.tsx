@@ -1,34 +1,55 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import "./DropDown.css";
+import { sortOptions, type SortType } from "../constants/sortOptions";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 
-const SORT_OPTIONS = ['최신순', '좋아요순', '조회순', '제목순'];
-
-type SortType = (typeof SORT_OPTIONS)[number];
-
-export default function DropDown(){
-    const [isOpen, setIsOpen] = useState(false);
-    const [sortType, setSortType] = useState<SortType>('최신순');
-
-    const handleSelect = (option: SortType) => {
-    setSortType(option);
-    setIsOpen(!isOpen);
-  };
-  
-
-    return(
-        <div>
-            <button onClick={() => setIsOpen((prev) => !prev)} className= "flex items-center justify-between w-26 px-4 py-2 bg-white rounded-2xl shadow text-sm font-bold text-gray-700  transition-all hover:bg-gray-50"> {sortType}
-                <span>
-                    {isOpen ? '▲' : '▼'}
-                </span>
-            </button>
-
-      {isOpen && (
-        <ul>
-          {SORT_OPTIONS.map((option) => (
-            <li key={option}>
-              <button onClick={() => handleSelect(option)} className= "flex items-center justify-between w-22 px-4 py-2 bg-white rounded-2xl shadow text-sm font-bold text-gray-700  transition-all hover:bg-gray-50"> {option} </button>
-            </li>))}
-        </ul>)}
-    </div>
-    );
+interface DropDownProps {
+  activeSort: SortType;
+  onSortChange: (sort: SortType) => void;
 }
+
+function DropDown({ activeSort, onSortChange }: DropDownProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useClickOutside(ref, () => setIsOpen(false));
+
+  const handleSelect = (option: SortType) => {
+    onSortChange(option);
+    setIsOpen(false);
+  };
+
+  return (
+        <div className="post-dropdown-wrapper">
+      <div className="post-dropdown-container" ref={ref}>
+        <button
+          onClick={() => setIsOpen((prev) => !prev)}
+          className="post-dropdown-trigger"
+        >
+          {activeSort}
+          <span className={`post-dropdown-chevron ${isOpen ? "post-dropdown-chevron-open" : ""}`}>
+            ▼
+          </span>
+        </button>
+
+        {isOpen && (
+          <div className="post-dropdown-menu">
+            {sortOptions.map((option) => (
+              <button
+                key={option}
+                onClick={() => handleSelect(option)}
+                className={`post-dropdown-menu-item ${
+                  activeSort === option ? "post-dropdown-menu-item-active" : ""
+                }`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default DropDown;
