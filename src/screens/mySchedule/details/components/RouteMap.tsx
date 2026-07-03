@@ -1,8 +1,8 @@
-import type { MyScheduleDetail } from '../../../../types';
+import type { RouteSchedule } from '../../../../types';
 import styles from './css/RouteMap.module.css';
 
 interface RouteMapProps {
-    places: MyScheduleDetail[];
+    places: RouteSchedule[];
 }
 
 const positions = [

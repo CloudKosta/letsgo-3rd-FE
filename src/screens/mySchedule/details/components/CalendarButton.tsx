@@ -9,6 +9,7 @@ import styles from './css/CalendarButton.module.css';
 interface CalendarButtonProps {
     date?: string;
     onDateChange?: (date: string) => void;
+    disabled?: boolean;
 }
 
 function parseDate(s?: string): Date | undefined {
@@ -25,7 +26,7 @@ function formatDate(d: Date): string {
     return `${y}-${m}-${day}`;
 }
 
-function CalendarButton({ date, onDateChange }: CalendarButtonProps) {
+function CalendarButton({ date, onDateChange, disabled = false }: CalendarButtonProps) {
     const [open, setOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
@@ -33,7 +34,11 @@ function CalendarButton({ date, onDateChange }: CalendarButtonProps) {
 
     return (
         <div className={styles.wrapper} ref={ref}>
-            <button className={styles.trigger} onClick={() => setOpen((v) => !v)}>
+            <button
+                className={styles.trigger}
+                onClick={() => !disabled && setOpen((v) => !v)}
+                disabled={disabled}
+            >
                 <Calendar className={styles.icon} />
                 {date ?? '날짜 선택'}
             </button>

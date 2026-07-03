@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api } from "../../../api/axiosInstance";
+import { getMyScheduleList } from "../../../api/myScheduleApi";
 import type { MySchedule } from "../../../types";
 
 export function useMySchedule() {
@@ -14,8 +14,8 @@ export function useMySchedule() {
       setLoading(true);
       setError(null);
       try {
-        const res = await api.get<MySchedule[]>("/api/schedules/my");
-        if (!ignore) setSchedules(res.data);
+        const data = await getMyScheduleList();
+        if (!ignore) setSchedules(data);
       } catch {
         if (!ignore) setError("일정을 불러오지 못했습니다.");
       } finally {

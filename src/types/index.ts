@@ -57,3 +57,19 @@ export interface Colleague {
     email: string;
     permission: string;
 }
+
+export interface ScheduleDetailInfo {
+    scheduleTitle: string;
+    startAt: string;
+    budgetDetail: string;
+    todoDetail: string;
+}
+
+export interface RouteSchedule {
+    visitId: string;
+    visitOrder: string;
+    placeId: string;
+    title: string;
+    distanceToNext: number;
+    scheduleType: string;
+}

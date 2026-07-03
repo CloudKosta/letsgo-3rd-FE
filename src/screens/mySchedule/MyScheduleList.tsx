@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Calendar, User } from 'lucide-react';
-import { mockSchedules } from '../../data/mockSchedules';
+import { useMySchedule } from './hooks/useMySchedule';
 import ScheduleTab from './components/ScheduleTab';
 import type { TabType } from './components/ScheduleTab';
 import SortDropdown from './components/SortDropdown';
@@ -11,13 +11,14 @@ import SearchBox from './details/components/SearchBox';
 import styles from './MyScheduleList.module.css';
 
 function MyScheduleList() {
+    const { schedules, loading, error } = useMySchedule();
     const [activeTab, setActiveTab] = useState<TabType>('all');
     const [activeSort, setActiveSort] = useState<SortOption>(sortOptions[0]);
     const [keyword, setKeyword] = useState('');
     const [submittedQuery, setSubmittedQuery] = useState('');
 
     const query = submittedQuery.trim().toLowerCase();
-    const filtered = mockSchedules.filter((s) => {
+    const filtered = schedules.filter((s) => {
         if (activeTab === 'shared' && !s.isShared) return false;
         if (query && !s.myScheduleTitle.toLowerCase().includes(query)) return false;
         return true;
@@ -54,11 +55,23 @@ function MyScheduleList() {
             </div>
 
             <div className={styles.list}>
-                {sorted.map((schedule) => (
+                {loading && (
+                    <div className={styles.emptyState}>
+                        <p className={styles.emptyText}>불러오는 중...</p>
+                    </div>
+                )}
+
+                {!loading && error && (
+                    <div className={styles.emptyState}>
+                        <p className={styles.emptyText}>{error}</p>
+                    </div>
+                )}
+
+                {!loading && !error && sorted.map((schedule) => (
                     <ScheduleCard key={schedule.myScheduleId} schedule={schedule} />
                 ))}
 
-                {sorted.length === 0 && (
+                {!loading && !error && sorted.length === 0 && (
                     <div className={styles.emptyState}>
                         <Calendar className={styles.emptyIcon} />
                         <p className={styles.emptyText}>일정이 없습니다</p>
