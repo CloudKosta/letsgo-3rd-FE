@@ -22,18 +22,33 @@ export interface MyScheduleDetail {
 }
 
 export interface PostSchedule {
-    postId: number;
-    postTitle: string;
-    scheduleTitle: string;
-    author: string;
-    anonymous: boolean;
-    createdAt: string;
-    startAt: string;
-    placeCount: number;
-    placeTitles: string[];
-    viewCount: number;
-    likeCount: number;
-    isMine: boolean;
+  postId: string;
+  title: string;
+  likeCount: number;
+  viewCount: number;
+  isAnonymous: number;
+  isReported: number;
+  isHidden: number;
+  userName: string;
+  placeTitle: string;
+  addr1: string;
+  firstImage: string;
+}
+
+export interface PostScheduleDetail {
+  postId: string;
+  scheduleTitle: string;
+  likeCount: number;
+  budgetDetail: string;
+  todoDetail: string;
+  owner: boolean;
+  routes: PostScheduleRoute[];
+}
+
+export interface PostScheduleRoute {
+  visitId: string;
+  visitOrder: number;
+  title: string;
 }
 
 export interface Colleague {

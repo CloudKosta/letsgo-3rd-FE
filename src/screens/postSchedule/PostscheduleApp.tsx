@@ -13,25 +13,27 @@ export default function PostScheduleApp() {
   const [activeSort, setActiveSort] = useState<SortType>(sortOptions[0]);
   const [keyword, setKeyword] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
+  const currentUserName = "나";
 
   const query = submittedQuery.trim().toLowerCase();
   const filteredPosts = mockPostSchedules.filter((post) => {
-    if (activeTab === "mine" && !post.isMine) return false;
+    if (post.isHidden === 1) return false;
+    if (activeTab === "mine" && post.userName !== currentUserName) return false;
     if (!query) return true;
 
     return [
-      post.postTitle,
-      post.scheduleTitle,
-      post.anonymous ? "" : post.author,
-      ...post.placeTitles,
+      post.title,
+      post.placeTitle,
+      post.addr1,
+      post.isAnonymous === 1 ? "" : post.userName,
     ].some((value) => value.toLowerCase().includes(query));
   });
 
   const sortedPosts = [...filteredPosts].sort((a, b) => {
     if (activeSort === "좋아요순") return b.likeCount - a.likeCount;
     if (activeSort === "조회순") return b.viewCount - a.viewCount;
-    if (activeSort === "제목순") return a.postTitle.localeCompare(b.postTitle);
-    return b.createdAt.localeCompare(a.createdAt);
+    if (activeSort === "제목순") return a.title.localeCompare(b.title);
+    return 0;
   });
 
   return (
