@@ -34,7 +34,7 @@ export default function ChatBot() {
             <div className="chatbot-input-container">
                 <div className="chatbot-input-wrapper">
                     <input className="chatbot-input"
-                        type="text" placeholder="메시지를 입력해주세요"
+                        type="text" placeholder="레저스포츠 관련 질문을 입력해보세요!"
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                         onKeyDown={(e) => e.key === "Enter" && handleSend()} />

@@ -35,9 +35,6 @@ function MyScheduleList() {
         <div className={styles.page}>
             <div className={styles.titleBar}>
                 <h1 className={styles.title}>내 일정목록</h1>
-                <button className={styles.profileBtn} aria-label="프로필">
-                    <User className={styles.profileIcon} />
-                </button>
             </div>
 
             <ScheduleTab activeTab={activeTab} onTabChange={setActiveTab} />
