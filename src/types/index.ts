@@ -39,16 +39,31 @@ export interface PostScheduleDetail {
   postId: string;
   scheduleTitle: string;
   likeCount: number;
+  viewCount: number;
+  writerId: string;
+  owner: boolean; 
+  routes: RouteSchedule[];
+  maps: MapSchedule[];
   budgetDetail: string;
   todoDetail: string;
-  owner: boolean;
-  routes: PostScheduleRoute[];
+  isHidden: number;
 }
 
-export interface PostScheduleRoute {
+export interface RouteSchedule {
   visitId: string;
-  visitOrder: number;
+  visitOrder: string;
+  placeId: string;
   title: string;
+  distanceToNext: number;
+  scheduleType: string;
+}
+
+export interface MapSchedule {
+  visitOrder: string;
+  title: string;
+  mapX: string;
+  mapY: string;
+  distanceToNext: string;
 }
 
 export interface Colleague {
