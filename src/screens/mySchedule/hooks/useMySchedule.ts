@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import { getMyScheduleList } from "../../../api/myScheduleApi";
+import { useAuthStore } from "../../../store/authStore";
 import type { MySchedule } from "../../../types";
 
 export function useMySchedule() {
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   const [schedules, setSchedules] = useState<MySchedule[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      setSchedules([]);
+      setError("로그인을 하여 내 일정을 추가해보세요.");
+      setLoading(false);
+      return;
+    }
+
     let ignore = false;
 
     async function fetchSchedules() {
@@ -28,7 +37,7 @@ export function useMySchedule() {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [isLoggedIn]);
 
   return { schedules, loading, error };
 }

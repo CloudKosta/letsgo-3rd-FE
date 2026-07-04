@@ -1,5 +1,5 @@
 import type { HeaderButtonProp } from './HeaderButton';
-import { LogInIcon, LogOutIcon, SearchIcon } from 'lucide-react';
+import { LogInIcon, LogOutIcon } from 'lucide-react';
 import HeaderButton from './HeaderButton';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
@@ -16,11 +16,10 @@ function Header() {
     };
 
     const headerItems: HeaderButtonProp[] = [
-        { label: 'search', Icon: SearchIcon },
         { label: 'login', Icon: LogInIcon, onClick: () => navigate('/user/login') },
         { label: 'logout', Icon: LogOutIcon, onClick: handleLogout }
     ];
-    
+
     return (
         <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 px-4 flex items-center justify-between z-50">
             <a href="/" className="font-bold text-xl tracking-tight text-blue-600">
@@ -30,6 +29,9 @@ function Header() {
             <div className="flex items-center gap-2">
                 {isLoggedIn && user && (
                     <span className="text-sm font-medium text-gray-700">{user.name}님</span>
+                )}
+                {!isLoggedIn && (
+                    <span className="text-sm font-medium text-gray-700">로그인</span>
                 )}
                 {headerItems
                     .filter((item) => {

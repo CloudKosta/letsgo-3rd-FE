@@ -5,7 +5,15 @@
 }
 
 .chatbot-messages {
-    @apply flex-grow overflow-y-auto p-4;
+    @apply flex-grow overflow-y-auto p-4 pt-20;
+}
+
+.chatbot-error {
+    @apply text-center text-sm text-red-500 my-2;
+}
+
+.chatbot-send-button:disabled {
+    @apply opacity-40 cursor-not-allowed;
 }
 
 .chatbot-input-container {
