@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .post-schedule-page {
-    @apply flex flex-col min-h-0 flex-1;
+  @apply flex flex-col min-h-0 flex-1;
 }
 
 .post-schedule-title-bar {
@@ -24,10 +24,6 @@
   @apply w-5 h-5 text-white;
 }
 
-
-.post-schedule-page {
-  @apply flex flex-col min-h-0 flex-1;
-}
 
 .post-schedule-filter-row {
   @apply px-5 pb-3 flex items-center gap-2;

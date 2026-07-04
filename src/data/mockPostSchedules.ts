@@ -2,7 +2,7 @@ import type { PostSchedule } from "../types";
 
 export const mockPostSchedules: PostSchedule[] = [
     {
-        postId: "post-1",
+        postId: "1",
         title: "가평 주말 나들이 코스 공유",
         likeCount: 24,
         viewCount: 128,
@@ -15,7 +15,7 @@ export const mockPostSchedules: PostSchedule[] = [
         firstImage: "",
     },
     {
-        postId: "post-2",
+        postId: "2",
         title: "강원도 여름 바다 일정",
         likeCount: 42,
         viewCount: 241,
@@ -28,7 +28,7 @@ export const mockPostSchedules: PostSchedule[] = [
         firstImage: "",
     },
     {
-        postId: "post-3",
+        postId: "3",
         title: "부산 먹방 루트 추천",
         likeCount: 18,
         viewCount: 92,
@@ -41,7 +41,7 @@ export const mockPostSchedules: PostSchedule[] = [
         firstImage: "",
     },
     {
-        postId: "post-4",
+        postId: "4",
         title: "제주도 힐링 일정 정리",
         likeCount: 51,
         viewCount: 305,
