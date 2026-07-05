@@ -4,28 +4,27 @@ import { useNavigate, useParams } from "react-router-dom";
 import PostScheduleBudget from "./components/detail/PostScheduleBudget";
 import PostScheduleDetailTab from "./components/detail/PostScheduleDetailTab";
 import type { PostScheduleDetailTabType } from "./components/detail/PostScheduleDetailTab";
-import PostScheduleSchedule from "./components/detail/PostScheduleSchedule";
+import PostScheduleSchedulePanel from "./components/detail/PostScheduleSchedulePanel";
 import PostScheduleTodo from "./components/detail/PostScheduleTodo";
-import { mockPostScheduleDetails } from "../../data/mockPostScheduleDetails";
+import { usePostScheduleDetail } from "./hooks/usePostScheduleDetail";
 import "./PostScheduleDetailApp.css";
 
 export default function PostScheduleDetailApp() {
   const { id } = useParams();
-  const detail = id ? mockPostScheduleDetails[id] : null;
+  const { detail, loading, error } = usePostScheduleDetail(id);
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<PostScheduleDetailTabType>("schedule");
 
-  // useEffect(() => {
-  //   if (!id) return;
-  //
-  //   axios.get<PostScheduleDetail>(`/api/postSchedule/${id}`)
-  //     .then(res => {
-  //       setDetail(res.data);
-  //     });
-  // }, [id]);
+  if (loading) {
+    return <div className="post-schedule-detail-not-found">로딩중...</div>;
+  }
+
+  if (error) {
+    return <div className="post-schedule-detail-not-found">{error}</div>;
+  }
 
   if (!detail) {
-    return <div className="post-schedule-detail-not-found">로딩중...</div>;
+    return <div className="post-schedule-detail-not-found">게시물을 찾을 수 없습니다.</div>;
   }
 
   return (
@@ -47,7 +46,7 @@ export default function PostScheduleDetailApp() {
 
         <div className="post-schedule-detail-tab-content">
           {activeTab === "schedule" && (
-            <PostScheduleSchedule maps={detail.maps} routes={detail.routes} />
+            <PostScheduleSchedulePanel maps={detail.maps} routes={detail.routes} />
           )}
 
           {activeTab === "budget" && (
