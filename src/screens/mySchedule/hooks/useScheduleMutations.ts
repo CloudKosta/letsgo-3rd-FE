@@ -6,7 +6,7 @@ import {
   deleteSchedule,
 } from "../../../api/myScheduleApi";
 
-export function useScheduleMutations(scheduleId?: number) {
+export function useScheduleMutations(scheduleId?: string) {
   const saveTodo = useCallback(
     async (content: string) => {
       if (scheduleId === undefined) return;

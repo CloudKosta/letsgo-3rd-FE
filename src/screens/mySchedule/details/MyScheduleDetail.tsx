@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Trash2 } from 'lucide-react';
+import { Trash2, LogOut } from 'lucide-react';
 import type { ScheduleDetailInfo, RouteSchedule } from '../../../types';
 import DetailTab from './components/DetailTab';
 import type { DetailTabType } from './components/DetailTab';
 import CalendarButton from './components/CalendarButton';
 import NaverRouteMap from '../../../components/shared/NaverRouteMap';
 import PlaceList from './components/PlaceList';
+import AddPlaceSheet from './components/AddPlaceSheet';
 import { useMapSchedule } from '../hooks/useMapSchedule';
+import { addVisitItem, leaveSharedSchedule } from '../../../api/myScheduleApi';
+import type { PlaceItem } from '../../../api/placeApi';
 import ShareTab from './components/ShareTab';
 import TodoTab from './components/TodoTab';
 import BudgetTab from './components/BudgetTab';
@@ -15,20 +18,22 @@ import { useScheduleMutations } from '../hooks/useScheduleMutations';
 import styles from './MyScheduleDetail.module.css';
 
 interface MyScheduleDetailProps {
-    scheduleId?: number;
+    scheduleId?: string;
     info?: ScheduleDetailInfo | null;
     route?: RouteSchedule[];
     permission?: string | null;
     loading?: boolean;
     error?: string | null;
     patchInfo?: (partial: Partial<ScheduleDetailInfo>) => void;
+    reload?: () => void;
 }
 
-function MyScheduleDetail({ scheduleId, info, route = [], permission, loading, error, patchInfo }: MyScheduleDetailProps) {
+function MyScheduleDetail({ scheduleId, info, route = [], permission, loading, error, patchInfo, reload }: MyScheduleDetailProps) {
     const navigate = useNavigate();
     const { saveTodo, saveBudget, saveStartAt, removeSchedule } = useScheduleMutations(scheduleId);
     const [activeTab, setActiveTab] = useState<DetailTabType>('schedule');
-    const mapPlaces = useMapSchedule(scheduleId);
+    const { maps: mapPlaces, reload: reloadMap } = useMapSchedule(scheduleId);
+    const [sheetOpen, setSheetOpen] = useState(false);
 
     if (loading) {
         return <div className={styles.notFound}>불러오는 중...</div>;
@@ -42,6 +47,16 @@ function MyScheduleDetail({ scheduleId, info, route = [], permission, loading, e
 
     const isOwner = permission === 'OWNER';
     const canEdit = isOwner || permission === 'W';
+
+    const handleAddPlace = async (place: PlaceItem) => {
+        try {
+            await addVisitItem(scheduleId, place.placeId, route.length + 1);
+            reload?.();      // 목록(route) 갱신
+            reloadMap();     // 지도 갱신
+        } catch (err) {
+            alert(err instanceof Error ? err.message : '장소 추가에 실패했습니다.');
+        }
+    };
 
     const handleDateChange = async (next: string) => {
         const prev = info.startAt;
@@ -88,6 +103,16 @@ function MyScheduleDetail({ scheduleId, info, route = [], permission, loading, e
         }
     };
 
+    const handleLeave = async () => {
+        if (!window.confirm('이 공유 일정에서 나갈까요? 내 목록에서 사라집니다.')) return;
+        try {
+            await leaveSharedSchedule(scheduleId);
+            navigate('/mySchedule');
+        } catch (err) {
+            alert(err instanceof Error ? err.message : '공유 나가기에 실패했습니다.');
+        }
+    };
+
     return (
         <div className={styles.page}>
             {!isOwner && (
@@ -104,10 +129,15 @@ function MyScheduleDetail({ scheduleId, info, route = [], permission, loading, e
 
             <div className={styles.dateRow}>
                 <CalendarButton date={info.startAt} onDateChange={handleDateChange} disabled={!canEdit} />
-                {isOwner && (
+                {isOwner ? (
                     <button className={styles.deleteBtn} onClick={handleDelete}>
                         <Trash2 className={styles.deleteIcon} />
                         삭제하기
+                    </button>
+                ) : (
+                    <button className={styles.deleteBtn} onClick={handleLeave}>
+                        <LogOut className={styles.deleteIcon} />
+                        공유 나가기
                     </button>
                 )}
             </div>
@@ -118,7 +148,7 @@ function MyScheduleDetail({ scheduleId, info, route = [], permission, loading, e
                 {activeTab === 'schedule' && (
                     <div className={styles.section}>
                         <NaverRouteMap maps={mapPlaces} />
-                        <PlaceList places={route} />
+                        <PlaceList places={route} onAddClick={isOwner ? () => setSheetOpen(true) : undefined} />
                     </div>
                 )}
 
@@ -142,6 +172,13 @@ function MyScheduleDetail({ scheduleId, info, route = [], permission, loading, e
                     <ShareTab myScheduleId={scheduleId} isOwner={isOwner} />
                 )}
             </div>
+
+            {sheetOpen && (
+                <AddPlaceSheet
+                    onClose={() => setSheetOpen(false)}
+                    onAdd={handleAddPlace}
+                />
+            )}
         </div>
     );
 }

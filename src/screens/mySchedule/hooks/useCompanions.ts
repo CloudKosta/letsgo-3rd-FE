@@ -7,7 +7,7 @@ import {
 } from "../../../api/myScheduleApi";
 import { publishToSharedBoard } from "../../../api/shareApi";
 
-export function useCompanions(scheduleId: number) {
+export function useCompanions(scheduleId: string) {
   const [companions, setCompanions] = useState<Colleague[]>([]);
   const [publishing, setPublishing] = useState(false);
 

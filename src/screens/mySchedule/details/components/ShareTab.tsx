@@ -4,7 +4,7 @@ import { useCompanions } from '../../hooks/useCompanions';
 import styles from './css/ShareTab.module.css';
 
 interface ShareTabProps {
-    myScheduleId: number;
+    myScheduleId: string;
     isOwner?: boolean;
 }
 

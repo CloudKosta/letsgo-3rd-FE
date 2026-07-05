@@ -1,5 +1,5 @@
 export interface PublishRequest {
-    myScheduleId: number;
+    myScheduleId: string;
     isAnonymous: boolean;
 }
 

@@ -4,9 +4,10 @@ import styles from './css/PlaceList.module.css';
 
 interface PlaceListProps {
     places: RouteSchedule[];
+    onAddClick?: () => void;
 }
 
-function PlaceList({ places }: PlaceListProps) {
+function PlaceList({ places, onAddClick }: PlaceListProps) {
     return (
         <div className={styles.list}>
             {places.map((place, i) => (
@@ -22,10 +23,12 @@ function PlaceList({ places }: PlaceListProps) {
                 </div>
             ))}
 
-            <button className={styles.addBtn}>
-                <Plus className={styles.addIcon} />
-                장소 추가
-            </button>
+            {onAddClick && (
+                <button className={styles.addBtn} onClick={onAddClick}>
+                    <Plus className={styles.addIcon} />
+                    장소 추가
+                </button>
+            )}
         </div>
     );
 }

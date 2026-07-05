@@ -16,6 +16,7 @@ import {
     Undo,
     Redo,
 } from 'lucide-react';
+import SaveButton from './SaveButton';
 import styles from './css/TodoTab.module.css';
 
 interface TodoTabProps {
@@ -70,9 +71,10 @@ function TodoTab({ initialContent = '', onSave, readOnly = false }: TodoTabProps
     ];
 
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.toolbar}>
-                {tools.map((t) => {
+        <div className="flex flex-col gap-3">
+            <div className={styles.wrapper}>
+                <div className={styles.toolbar}>
+                    {tools.map((t) => {
                     const Icon = t.icon;
                     return (
                         <button
@@ -112,20 +114,10 @@ function TodoTab({ initialContent = '', onSave, readOnly = false }: TodoTabProps
                 </button>
             </div>
 
-            <EditorContent editor={editor} className={styles.editor} />
+                <EditorContent editor={editor} className={styles.editor} />
+            </div>
 
-            {onSave && (
-                <div className="flex justify-end mt-3">
-                    <button
-                        type="button"
-                        onClick={handleSave}
-                        disabled={saving}
-                        className="px-5 py-2.5 rounded-2xl bg-[#ff7a00] text-white text-sm font-bold shadow-sm active:scale-[0.98] disabled:opacity-60"
-                    >
-                        {saving ? '저장 중...' : '저장'}
-                    </button>
-                </div>
-            )}
+            {onSave && <SaveButton onClick={handleSave} saving={saving} />}
         </div>
     );
 }

@@ -2,12 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import { getScheduleDetail } from "../../../api/myScheduleApi";
 import type { ScheduleDetailInfo, RouteSchedule } from "../../../types";
 
-export function useScheduleDetail(scheduleId?: number) {
+export function useScheduleDetail(scheduleId?: string) {
   const [info, setInfo] = useState<ScheduleDetailInfo | null>(null);
   const [route, setRoute] = useState<RouteSchedule[]>([]);
   const [permission, setPermission] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     if (scheduleId === undefined) return;
@@ -36,11 +38,13 @@ export function useScheduleDetail(scheduleId?: number) {
     return () => {
       ignore = true;
     };
-  }, [scheduleId]);
+  }, [scheduleId, reloadKey]);
+
+  const reload = useCallback(() => setReloadKey((k) => k + 1), []);
 
   const patchInfo = useCallback((partial: Partial<ScheduleDetailInfo>) => {
     setInfo((prev) => (prev ? { ...prev, ...partial } : prev));
   }, []);
 
-  return { info, route, permission, loading, error, patchInfo };
+  return { info, route, permission, loading, error, patchInfo, reload };
 }

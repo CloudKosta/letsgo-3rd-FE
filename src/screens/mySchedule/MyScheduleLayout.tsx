@@ -6,9 +6,10 @@ import { useScheduleDetail } from './hooks/useScheduleDetail';
 
 function MyScheduleLayout() {
     const match = useMatch('/mySchedule/:id');
-    const scheduleId = match ? Number(match.params.id) : undefined;
+    // my_schedule_id는 'S001'처럼 문자열이므로 숫자 변환하지 않고 그대로 사용한다.
+    const scheduleId = match ? match.params.id : undefined;
 
-    const { info, route, permission, loading, error, patchInfo } = useScheduleDetail(scheduleId);
+    const { info, route, permission, loading, error, patchInfo, reload } = useScheduleDetail(scheduleId);
 
     return (
         <>
@@ -26,6 +27,7 @@ function MyScheduleLayout() {
                             loading={loading}
                             error={error}
                             patchInfo={patchInfo}
+                            reload={reload}
                         />
                     }
                 />
