@@ -29,11 +29,6 @@ export default function PostScheduleRouteList({ routes }: PostScheduleRouteListP
           <span className="post-schedule-route-list-title">
             {route.title}
           </span>
-          {route.distanceToNext > 0 && (
-            <span className="post-schedule-route-list-distance">
-              {route.distanceToNext}km
-            </span>
-          )}
         </div>
       ))}
     </div>

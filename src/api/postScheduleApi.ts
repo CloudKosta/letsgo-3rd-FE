@@ -42,3 +42,7 @@ export async function copyPostScheduleToMySchedule(postId: string): Promise<void
 export async function reportPostSchedule(postId: string, reason: string): Promise<void> {
   await api.post(`/postschedule/api/${postId}/report`, { reason });
 }
+
+export async function deletePostSchedule(postId: string): Promise<void> {
+  await api.delete(`/postschedule/api/${postId}`);
+}

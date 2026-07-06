@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { User } from "lucide-react";
 import "./PostScheduleApp.css";
 import PostScheduleCard from "./components/PostScheduleCard";
 import { TabButton, type PostTabType } from "./components/TabButton";
@@ -23,9 +22,6 @@ export default function PostScheduleApp() {
     <div className="post-schedule-page">
       <div className="post-schedule-title-bar">
         <h1 className="post-schedule-title">일정게시판</h1>
-        <button className="post-schedule-profile-btn" aria-label="프로필">
-          <User className="post-schedule-profile-icon" />
-        </button>
       </div>
 
       <TabButton activeTab={activeTab} onTabChange={setActiveTab} />

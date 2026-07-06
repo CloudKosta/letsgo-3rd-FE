@@ -13,7 +13,7 @@
 }
 
 .post-card-title-group {
-    @apply min-w-0;
+    @apply min-w-0 flex-1;
 }
 
 .post-card-title {
@@ -24,12 +24,12 @@
     @apply text-blue-600;
 }
 
-.post-card-subtitle {
-    @apply mt-1 text-xs font-medium text-gray-500;
+.post-card-like-btn {
+    @apply shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full border border-gray-200 bg-white text-gray-500 cursor-pointer transition-colors duration-200 hover:bg-red-50 hover:text-red-500 hover:border-red-200 disabled:opacity-60 disabled:cursor-not-allowed;
 }
 
-.post-card-image {
-    @apply w-full h-32 object-cover rounded-xl mb-3 bg-gray-100;
+.post-card-like-icon {
+    @apply w-3.5 h-3.5;
 }
 
 .post-card-meta {
@@ -57,7 +57,11 @@
 }
 
 .post-card-footer {
-    @apply flex items-center justify-between border-t border-gray-100 pt-3 text-xs text-gray-400;
+    @apply flex items-center justify-between gap-3 border-t border-gray-100 pt-3 text-xs text-gray-400;
+}
+
+.post-card-footer > span {
+    @apply min-w-0 flex-1 truncate;
 }
 
 .post-card-stats {

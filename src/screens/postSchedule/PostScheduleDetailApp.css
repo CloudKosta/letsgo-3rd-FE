@@ -16,8 +16,28 @@
   @apply min-w-0 flex-1 text-lg font-bold text-gray-900 truncate;
 }
 
+.post-schedule-detail-delete-btn {
+  @apply shrink-0 w-9 h-9 rounded-full border border-gray-200 bg-white text-gray-500 flex items-center justify-center cursor-pointer transition-colors duration-200 hover:bg-red-50 hover:text-red-600 hover:border-red-200 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
 .post-schedule-detail-content {
   @apply flex-1 overflow-y-auto;
+}
+
+.post-schedule-detail-action-row {
+  @apply px-5 py-3 flex items-center justify-between gap-3 border-b border-gray-100 bg-white;
+}
+
+.post-schedule-detail-action-btn {
+  @apply flex-1 h-10 rounded-xl border text-sm font-semibold cursor-pointer transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed;
+}
+
+.post-schedule-detail-report-btn {
+  @apply border-gray-300 bg-white text-gray-700 hover:bg-gray-50;
+}
+
+.post-schedule-detail-copy-btn {
+  @apply border-blue-600 bg-blue-600 text-white hover:bg-blue-700;
 }
 
 .post-schedule-detail-tab-content {

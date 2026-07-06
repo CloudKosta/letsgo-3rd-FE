@@ -21,8 +21,8 @@ export interface PostScheduleDetail {
   owner: boolean;
   routes: RouteSchedule[];
   maps: MapSchedule[];
-  budgetDetail: string;
-  todoDetail: string;
+  budgetDetail: string | null;
+  todoDetail: string | null;
   isHidden: number;
 }
 
