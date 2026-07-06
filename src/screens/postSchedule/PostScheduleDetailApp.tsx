@@ -143,20 +143,8 @@ export default function PostScheduleDetailApp() {
               </button>
             </div>
 
-            <PostScheduleDetailTab activeTab={activeTab} onTabChange={setActiveTab} />
-
             <div className="post-schedule-detail-tab-content">
-              {activeTab === "schedule" && (
                 <PostScheduleSchedulePanel maps={detail.maps} routes={detail.routes} />
-              )}
-
-              {activeTab === "budget" && (
-                <PostScheduleBudget budgetDetail={detail.budgetDetail} />
-              )}
-
-              {activeTab === "todo" && (
-                <PostScheduleTodo todoDetail={detail.todoDetail} />
-              )}
             </div>
           </>
         )}

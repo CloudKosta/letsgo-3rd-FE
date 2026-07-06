@@ -2,11 +2,6 @@ import "./css/PostScheduleDetailTab.css";
 
 export type PostScheduleDetailTabType = "schedule" | "budget" | "todo";
 
-const tabs: { key: PostScheduleDetailTabType; label: string }[] = [
-  { key: "schedule", label: "일정" },
-  { key: "budget", label: "예산" },
-  { key: "todo", label: "TO-DO" },
-];
 
 interface PostScheduleDetailTabProps {
   activeTab: PostScheduleDetailTabType;
