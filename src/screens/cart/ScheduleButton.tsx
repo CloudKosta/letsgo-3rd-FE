@@ -28,10 +28,8 @@ export default function ScheduleButton() {
         try {
             const uniqueId = `SCH-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
-            // 1. Create schedule outline
             await createSchedule(uniqueId, trimmedTitle);
 
-            // 2. Add each place from cart as visit item
             for (let i = 0; i < cartItems.length; i++) {
                 const item = cartItems[i];
                 await addVisitItem(uniqueId, item.placeId, i + 1);

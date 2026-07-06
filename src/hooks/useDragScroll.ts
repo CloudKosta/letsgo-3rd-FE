@@ -15,7 +15,7 @@ export function useDragScroll() {
 
         const onMouseMove = (moveEvent: globalThis.MouseEvent) => {
             const x = moveEvent.pageX - ele.offsetLeft;
-            const walk = (x - startX) * 1.5; // 스크롤 감도 설정 (1.5배)
+            const walk = (x - startX) * 1.5;
             ele.scrollLeft = scrollLeft - walk;
         };
 
