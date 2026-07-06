@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { api } from "../../api/axiosInstance";
 import SearchInput from "./SearchInput";
 import LookupTable from "./LookupTable";
 import PlaceBox from "./PlaceBox";
@@ -54,11 +54,11 @@ export default function Place() {
     const [selectedSub, setSelectedSub] = useState('');
 
     useEffect(() => {
-        let endpoint = "http://127.0.0.1:5531/leisureListAjax";
+        let endpoint = "/leisureListAjax";
         if (currentTab === 'STAY') {
-            endpoint = "http://127.0.0.1:5531/stayListAjax";
+            endpoint = "/stayListAjax";
         } else if (currentTab === 'RESTAURANT') {
-            endpoint = "http://127.0.0.1:5531/restaurantListAjax";
+            endpoint = "/restaurantListAjax";
         }
 
 
@@ -69,7 +69,7 @@ export default function Place() {
             categoryCode = MAJOR_CODE_MAP[selectedMajor] || null;
         }
 
-        axios.get(endpoint, {
+        api.get(endpoint, {
             params: {
                 category: categoryCode,
                 keyword: keyword || null,

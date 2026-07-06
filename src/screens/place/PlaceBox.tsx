@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Heart, MapPin, SquarePlus, ImageOff } from "lucide-react";
 import { useCartStore } from '../../store/cartStore';
 import type { PlaceDTO } from "./interface";
-import axios from "axios"
+import { api } from "../../api/axiosInstance";
 import "./PlaceBox.css";
 
 interface PlaceBoxProps {
@@ -21,7 +21,7 @@ export default function PlaceBox({ place }: PlaceBoxProps) {
             params.append("placeId", place.placeId.toString());
             params.append("placeType", place.placeType.toString());
 
-            const response = await axios.post("http://127.0.0.1:5531/placeLikeAjax", params);
+            const response = await api.post("/placeLikeAjax", params);
             if (response.data && response.data.result === "success") {
                 setLikeCount(response.data.likeCount);
             }

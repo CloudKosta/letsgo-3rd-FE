@@ -45,11 +45,16 @@ function Header() {
                     <span className="text-sm font-medium text-gray-700">{user.name}님</span>
                 )}
                 {!isLoggedIn && (
-                    <span className="text-sm font-medium text-gray-700">로그인</span>
+                    <span
+                        className="text-sm font-medium text-gray-700 cursor-pointer"
+                        onClick={() => navigate('/user/login')}
+                    >
+                        로그인
+                    </span>
                 )}
                 {headerItems
                     .filter((item) => {
-                        if (item.label === 'login') return !isLoggedIn;
+                        if (item.label === 'login') return (!isLoggedIn);
                         if (item.label === 'logout') return isLoggedIn;
                         return true;
                     })

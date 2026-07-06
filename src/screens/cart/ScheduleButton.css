@@ -1,5 +1,5 @@
 @reference "../../index.css";
 
 .schedule-button {
-    @apply fixed bottom-20 left-4 right-4 flex items-center justify-center w-[calc(100%-2rem)] max-w-[460px] bg-[#f88f46] hover:bg-[#e07b34] active:bg-[#c96c2a] border border-[#f88f46] shadow-md mx-auto rounded-md p-4 gap-4 font-medium text-white cursor-pointer transition-colors duration-200 z-40;
+    @apply fixed bottom-20 left-4 right-4 flex items-center justify-center w-[calc(100%-2rem)] max-w-[460px] bg-blue-500 hover:bg-blue-400 active:bg-blue-600 border border-blue-500 shadow-md mx-auto rounded-md p-4 gap-4 font-medium text-white cursor-pointer transition-colors duration-200 z-40;
 }
