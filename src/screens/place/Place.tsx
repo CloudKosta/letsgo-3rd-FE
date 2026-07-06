@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect, useRef } from "react";
 import SearchInput from "./SearchInput";
 import LookupTable from "./LookupTable";
 import PlaceBox from "./PlaceBox";
+import { fetchPlacePage } from "../../api/placeApi";
 import type { PlaceDTO, TabType } from "./interface";
 import "./Place.css";
 
@@ -53,14 +53,33 @@ export default function Place() {
     const [selectedMajor, setSelectedMajor] = useState('');
     const [selectedSub, setSelectedSub] = useState('');
 
-    useEffect(() => {
-        let endpoint = "http://127.0.0.1:5531/leisureListAjax";
-        if (currentTab === 'STAY') {
-            endpoint = "http://127.0.0.1:5531/stayListAjax";
-        } else if (currentTab === 'RESTAURANT') {
-            endpoint = "http://127.0.0.1:5531/restaurantListAjax";
-        }
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const loaderRef = useRef<HTMLDivElement | null>(null);
 
+    const handleTabChange = (tab: TabType) => {
+        setCurrentTab(tab);
+        setPage(1);
+    };
+
+    const handleMajorChange = (major: string) => {
+        setSelectedMajor(major);
+        setPage(1);
+    };
+
+    const handleSubChange = (sub: string) => {
+        setSelectedSub(sub);
+        setPage(1);
+    };
+
+    const handleKeywordChange = (value: string) => {
+        setKeyword(value);
+        setPage(1);
+    };
+
+    useEffect(() => {
+        let ignore = false;
 
         let categoryCode: string | null = null;
         if (selectedSub) {
@@ -69,33 +88,54 @@ export default function Place() {
             categoryCode = MAJOR_CODE_MAP[selectedMajor] || null;
         }
 
-        axios.get(endpoint, {
-            params: {
-                category: categoryCode,
-                keyword: keyword || null,
-            }
-        })
+        setLoading(true);
+        fetchPlacePage(currentTab, { category: categoryCode, keyword, page })
             .then(response => {
-                setPlaces(response.data);
+                if (ignore) return;
+                setPlaces(prev => (page === 1 ? response.content : [...prev, ...response.content]));
+                setTotalPages(response.totalPages);
             })
             .catch(error => {
                 console.error("플레이스 없음:", error);
-                setPlaces([]);
+                if (!ignore && page === 1) {
+                    setPlaces([]);
+                    setTotalPages(1);
+                }
+            })
+            .finally(() => {
+                if (!ignore) setLoading(false);
             });
 
-    }, [currentTab, selectedMajor, selectedSub, keyword]);
+        return () => {
+            ignore = true;
+        };
+    }, [currentTab, selectedMajor, selectedSub, keyword, page]);
+
+    useEffect(() => {
+        const el = loaderRef.current;
+        if (!el) return;
+
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting && !loading && page < totalPages) {
+                setPage(prev => prev + 1);
+            }
+        });
+        observer.observe(el);
+
+        return () => observer.disconnect();
+    }, [loading, page, totalPages]);
 
     return (
         <div className="place-container">
-            <SearchInput keyword={keyword} setKeyword={setKeyword} />
+            <SearchInput keyword={keyword} setKeyword={handleKeywordChange} />
 
             <LookupTable
                 currentTab={currentTab}
-                setCurrentTab={setCurrentTab}
+                setCurrentTab={handleTabChange}
                 selectedMajor={selectedMajor}
-                setSelectedMajor={setSelectedMajor}
+                setSelectedMajor={handleMajorChange}
                 selectedSub={selectedSub}
-                setSelectedSub={setSelectedSub}
+                setSelectedSub={handleSubChange}
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -103,6 +143,8 @@ export default function Place() {
                     <PlaceBox key={place.placeId} place={place} />
                 ))}
             </div>
+
+            <div ref={loaderRef} className="h-10" />
         </div>
     );
 }
