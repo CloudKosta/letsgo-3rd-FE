@@ -80,7 +80,6 @@ export default function LookupTable({
             </div>
 
             <div className="lookup-section">
-                <div className="lookup-section-title">중분류</div>
                 <div
                     className="lookup-button-group"
                     ref={majorDrag.ref}
@@ -109,7 +108,6 @@ export default function LookupTable({
             <div className={`lookup-section-sub-container ${selectedMajor && subCategories.length > 0 ? 'open' : ''}`}>
                 <div className="lookup-section-sub-inner">
                     <div className="lookup-section">
-                        <div className="lookup-section-title">소분류</div>
                         <div
                             className="lookup-button-group"
                             ref={subDrag.ref}
