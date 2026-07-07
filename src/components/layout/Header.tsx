@@ -26,8 +26,12 @@ function Header() {
     return (
         <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 px-4 flex items-center justify-between z-50">
             <div className="flex items-center gap-2">
-                <a href="/" className="font-bold text-xl tracking-tight text-blue-600">
-                    LetsGo
+                <a href="/" className="flex items-center hover:opacity-90 transition-opacity">
+                    <img
+                        src="/letsgo-logo-v5.png"
+                        alt="LetsGO"
+                        className="h-[40px] w-auto object-contain"
+                    />
                 </a>
                 {isUserPage && (
                     <button
