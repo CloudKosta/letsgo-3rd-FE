@@ -25,7 +25,7 @@
 }
 
 .lookup-section {
-    @apply mb-4 last:mb-0;
+    @apply mb-4 last:mb-0 overflow-hidden;
 }
 
 .lookup-section-title {
