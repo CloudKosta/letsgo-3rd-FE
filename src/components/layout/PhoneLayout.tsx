@@ -25,9 +25,9 @@ function PhoneLayoutContent() {
 
     return (
         <div className="flex flex-col h-screen">
-            <Header />
+            {!isUserPage && <Header />}
 
-            <main className={`flex-1 overflow-y-auto mt-16 ${isUserPage ? 'mb-0 bg-white' : 'mb-16 bg-gray-50'}`}>
+            <main className={`flex-1 overflow-y-auto ${isUserPage ? 'flex flex-col mt-0 mb-0 bg-white' : 'mt-16 mb-16 bg-gray-50'}`}>
                 <Routes>
                     <Route path="/" element={<Place />} />
                     <Route path="/cart" element={<Cart />} />

@@ -46,10 +46,6 @@ function Signup() {
 
     return (
         <div className="signup-container">
-            <div className="user-form-header">
-                <h2 className="user-form-title">회원가입</h2>
-            </div>
-
             <form onSubmit={handleSubmit}>
                 <Input
                     label="이름"

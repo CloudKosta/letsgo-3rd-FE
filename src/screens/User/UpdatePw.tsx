@@ -44,9 +44,6 @@ function UpdatePw() {
 
     return (
         <div className="user-form-container">
-            <div className="user-form-header">
-                <h2 className="user-form-title">비밀번호 찾기</h2>
-            </div>
 
             <form onSubmit={handleSubmit}>
                 <Input

@@ -22,9 +22,6 @@ function Login() {
 
     return (
         <div className="user-form-container">
-            <div className="user-form-header">
-                <h2 className="user-form-title">로그인</h2>
-            </div>
 
             {errorMessage && (
                 <div className="user-form-error">
