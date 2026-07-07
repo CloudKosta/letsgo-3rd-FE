@@ -20,8 +20,8 @@ export default function PostScheduleApp() {
 
   return (
     <div className="post-schedule-page">
-      <div className="post-schedule-title-bar">
-        <h1 className="post-schedule-title">일정게시판</h1>
+      <div className="post-schedule-title-bar post-schedule-title">
+        
       </div>
 
       <TabButton activeTab={activeTab} onTabChange={setActiveTab} />

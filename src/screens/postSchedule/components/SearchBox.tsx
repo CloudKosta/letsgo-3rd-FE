@@ -8,7 +8,7 @@ interface SearchBoxProps {
     placeholder?: string;
 }
 
-function SearchBox({ value, onChange, onSearch, placeholder = '장소명-게시물명을 검색하세요' }: SearchBoxProps) {
+function SearchBox({ value, onChange, onSearch}: SearchBoxProps) {
     const submit = () => onSearch?.(value.trim());
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -31,7 +31,6 @@ function SearchBox({ value, onChange, onSearch, placeholder = '장소명-게시�
                     type="text"
                     className="post-search-input"
                     value={value}
-                    placeholder={placeholder}
                     onChange={(e) => onChange(e.target.value)}
                     onKeyDown={handleKeyDown}
                 />

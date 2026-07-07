@@ -34,7 +34,7 @@ function MyScheduleList() {
     return (
         <div className={styles.page}>
             <div className={styles.titleBar}>
-                <h1 className={styles.title}>내 일정목록</h1>
+            
             </div>
 
             <ScheduleTab activeTab={activeTab} onTabChange={setActiveTab} />
@@ -45,7 +45,6 @@ function MyScheduleList() {
                         value={keyword}
                         onChange={setKeyword}
                         onSearch={setSubmittedQuery}
-                        placeholder="일정 이름으로 검색"
                     />
                 </div>
                 <SortDropdown activeSort={activeSort} onSortChange={setActiveSort} />

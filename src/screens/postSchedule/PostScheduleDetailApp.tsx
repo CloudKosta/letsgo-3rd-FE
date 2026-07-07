@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-import PostScheduleBudget from "./components/detail/PostScheduleBudget";
-import PostScheduleDetailTab from "./components/detail/PostScheduleDetailTab";
-import type { PostScheduleDetailTabType } from "./components/detail/PostScheduleDetailTab";
+// import PostScheduleBudget from "./components/detail/PostScheduleBudget";
+// import PostScheduleDetailTab from "./components/detail/PostScheduleDetailTab";
+// import type { PostScheduleDetailTabType } from "./components/detail/PostScheduleDetailTab";
 import PostScheduleSchedulePanel from "./components/detail/PostScheduleSchedulePanel";
-import PostScheduleTodo from "./components/detail/PostScheduleTodo";
+// import PostScheduleTodo from "./components/detail/PostScheduleTodo";
 import {
   copyPostScheduleToMySchedule,
   deletePostSchedule,
@@ -19,7 +19,7 @@ export default function PostScheduleDetailApp() {
   const { id } = useParams();
   const { detail, loading, error } = usePostScheduleDetail(id);
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<PostScheduleDetailTabType>("schedule");
+  // const [activeTab, setActiveTab] = useState<PostScheduleDetailTabType>("schedule");
   const [actionLoading, setActionLoading] = useState<"report" | "copy" | "delete" | null>(null);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [reportReason, setReportReason] = useState("");
