@@ -110,7 +110,8 @@ export default function Place() {
                 category: categoryCode,
                 keyword: keyword || null,
                 page: activePage,
-                sortOrder: currentTab === 'LEISURE' ? 'distance' : 'name'
+                sortOrder: 'popular'
+
             }
         })
             .then(response => {
