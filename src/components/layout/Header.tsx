@@ -4,6 +4,12 @@ import HeaderButton from './HeaderButton';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 
+function maskName(name: string): string {
+    if (!name) return "";
+    if (name.length <= 1) return name;
+    return name[0] + '*'.repeat(name.length - 1);
+}
+
 function Header() {
     const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
     const user = useAuthStore((s) => s.user);
@@ -34,7 +40,7 @@ function Header() {
 
             <div className="flex items-center gap-2">
                 {isLoggedIn && user && (
-                    <span className="text-sm font-medium text-gray-700">{user.name}님</span>
+                    <span className="text-sm font-medium text-gray-700">{maskName(user.name)}님</span>
                 )}
                 {!isLoggedIn && (
                     <span
