@@ -37,7 +37,7 @@ export function usePostScheduleDetail(postId?: string) {
       } catch {
         if (!ignore) {
           setDetail(null);
-          setError("로그인 후 확인해보세요.");
+          setError("로그인을 하여 게시물을 확인해보세요.");
         }
       } finally {
         if (!ignore) setLoading(false);
@@ -54,6 +54,6 @@ export function usePostScheduleDetail(postId?: string) {
   return {
     detail: postId ? detail : null,
     loading,
-    error: postId ? error : "로그인 후 확인해보세요.",
+    error: postId ? error : "로그인을 하여 게시물을 확인해보세요.",
   };
 }
