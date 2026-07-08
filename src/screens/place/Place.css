@@ -1,5 +1,5 @@
 @reference "../../index.css";
 
 .place-container {
-    @apply flex flex-col gap-4 pb-6;
+    @apply flex flex-col gap-3 pb-6;
 }

@@ -1,7 +1,7 @@
 @reference "../../index.css";
 
 .place-box-container {
-    @apply w-full max-w-[360px] bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100/80 mx-auto my-4 transition-all duration-300 hover:shadow-md hover:translate-y-[-2px];
+    @apply w-full max-w-[360px] bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100/80 mx-auto my-0 transition-all duration-300 hover:shadow-md hover:translate-y-[-2px];
 }
 
 .place-box-image-wrapper {
@@ -40,12 +40,16 @@
     @apply w-3.5 h-3.5 mr-1 text-gray-400 shrink-0;
 }
 
+.place-box-title-wrapper {
+    @apply flex justify-between items-center gap-3 w-full mt-0.5 min-w-0;
+}
+
 .place-box-title {
-    @apply text-lg font-bold text-gray-800 tracking-tight mb-1;
+    @apply text-base font-bold text-gray-800 tracking-tight flex-1 min-w-0 mb-0;
 }
 
 .place-box-add-button {
-    @apply w-full mt-1.5 py-2.5 font-bold text-sm flex items-center justify-center gap-2 rounded-xl border border-blue-500 bg-white text-blue-500 hover:bg-blue-50 active:scale-98 transition-all cursor-pointer;
+    @apply shrink-0 py-1.5 px-3 font-bold text-xs flex items-center justify-center gap-1 rounded-xl border border-blue-500 bg-white text-blue-500 hover:bg-blue-50 active:scale-95 transition-all cursor-pointer;
 }
 
 .place-box-add-icon {

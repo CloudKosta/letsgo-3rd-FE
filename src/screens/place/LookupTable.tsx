@@ -54,7 +54,7 @@ export default function LookupTable({
         : [];
 
     return (
-        <div className="lookup-container">
+        <div className="lookup-container" >
             <div className="lookup-tabs">
                 <button
                     className={`lookup-tab ${currentTab === 'LEISURE' ? 'active' : ''}`}

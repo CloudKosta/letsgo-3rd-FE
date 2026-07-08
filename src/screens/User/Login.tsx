@@ -28,7 +28,11 @@ function Login() {
                     {errorMessage}
                 </div>
             )}
-
+            <img
+                src="/letsgo-logo-v5.png"
+                alt="LetsGO"
+                className="h-[100px] mb-10 w-auto object-contain"
+            />
             <form onSubmit={handleSubmit}>
                 <Input
                     id="userId"

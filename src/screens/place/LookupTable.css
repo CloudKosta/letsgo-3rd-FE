@@ -1,11 +1,11 @@
 @reference "../../index.css";
 
 .lookup-container {
-    @apply w-full max-w-[360px] bg-white border border-gray-100 mx-auto my-4 rounded-2xl p-4 shadow-sm transition-all duration-300;
+    @apply w-full max-w-[360px] bg-white border border-gray-100 mx-auto mt-1 mb-2 rounded-2xl p-4 shadow-sm transition-all duration-300;
 }
 
 .lookup-tabs {
-    @apply flex bg-gray-100/80 p-1 rounded-xl mb-4 gap-1;
+    @apply flex bg-gray-100/80 p-1 rounded-xl mb-3 gap-1;
 }
 
 .lookup-tab {

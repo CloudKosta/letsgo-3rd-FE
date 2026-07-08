@@ -162,7 +162,7 @@ export default function Place() {
     }, [hasMore, isLoading]);
 
     return (
-        <div className="place-container">
+        <div className="place-container mb-2">
             <SearchInput keyword={keyword} setKeyword={setKeyword} />
 
             <LookupTable
@@ -185,7 +185,7 @@ export default function Place() {
                     {isLoading ? "불러오는 중..." : "더 불러오기"}
                 </div>
             )}
-            
+
             <Footer />
         </div>
     );

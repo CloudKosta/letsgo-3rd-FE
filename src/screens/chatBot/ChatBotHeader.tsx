@@ -8,9 +8,11 @@ interface ChatBotHeaderProps {
 function ChatBotHeader({ onClear }: ChatBotHeaderProps) {
     return (
         <header className="chatbot-header">
-            <a href="/" className="chatbot-header-logo">
-                LetsGo
-            </a>
+            <img
+                src="/letsgo-logo-v5.png"
+                alt="LetsGO"
+                className="h-[40px] w-auto object-contain"
+            />
             {onClear && (
                 <button className="chatbot-header-clear" onClick={onClear} title="새 대화">
                     <RotateCcw className="w-5 h-5" />
