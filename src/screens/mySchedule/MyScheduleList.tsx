@@ -8,6 +8,7 @@ import { sortOptions } from './components/SortDropdown';
 import type { SortOption } from './components/SortDropdown';
 import ScheduleCard from './components/ScheduleCard';
 import SearchBox from './details/components/SearchBox';
+import Footer from '../../components/layout/Footer';
 import styles from './MyScheduleList.module.css';
 
 function MyScheduleList() {
@@ -73,6 +74,8 @@ function MyScheduleList() {
                         <p className={styles.emptyText}>일정이 없습니다</p>
                     </div>
                 )}
+
+                <Footer />
             </div>
         </div>
     );

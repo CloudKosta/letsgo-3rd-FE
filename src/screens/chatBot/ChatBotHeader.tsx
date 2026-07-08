@@ -9,7 +9,7 @@ function ChatBotHeader({ onClear }: ChatBotHeaderProps) {
     return (
         <header className="chatbot-header">
             <a href="/" className="chatbot-header-logo">
-                챗봇
+                LetsGo
             </a>
             {onClear && (
                 <button className="chatbot-header-clear" onClick={onClear} title="새 대화">

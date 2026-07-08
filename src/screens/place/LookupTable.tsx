@@ -114,12 +114,7 @@ export default function LookupTable({
                             onMouseDown={subDrag.onMouseDown}
                             style={subDrag.style}
                         >
-                            <button
-                                className={`lookup-btn ${selectedSub === '' ? 'active' : ''}`}
-                                onClick={() => setSelectedSub('')}
-                            >
-                                전체
-                            </button>
+
                             {subCategories.map((sub) => (
                                 <button
                                     key={sub}

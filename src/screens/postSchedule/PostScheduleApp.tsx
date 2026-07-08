@@ -4,6 +4,7 @@ import PostScheduleCard from "./components/PostScheduleCard";
 import { TabButton, type PostTabType } from "./components/TabButton";
 import SearchBox from "./components/SearchBox";
 import DropDown from "./components/DropDown";
+import Footer from "../../components/layout/Footer";
 import { sortOptions, type SortType } from "./constants/sortOptions";
 import { usePostScheduleList } from "./hooks/usePostScheduleList";
 
@@ -38,31 +39,31 @@ export default function PostScheduleApp() {
         <DropDown activeSort={activeSort} onSortChange={setActiveSort} />
       </div>
 
-      {loading && (
-        <div className="post-schedule-empty-state">
-          <p className="post-schedule-empty-text">로딩중...</p>
-        </div>
-      )}
+      <div className="post-schedule-list">
+        {loading && (
+          <div className="post-schedule-empty-state">
+            <p className="post-schedule-empty-text">로딩중...</p>
+          </div>
+        )}
 
-      {error && (
-        <div className="post-schedule-empty-state">
-          <p className="post-schedule-empty-text">{error}</p>
-        </div>
-      )}
+        {error && (
+          <div className="post-schedule-empty-state">
+            <p className="post-schedule-empty-text">{error}</p>
+          </div>
+        )}
 
-      {!loading && !error && (
-        <div className="post-schedule-list">
-          {posts.map((post) => (
-            <PostScheduleCard key={post.postId} post={post} />
-          ))}
+        {!loading && !error && posts.map((post) => (
+          <PostScheduleCard key={post.postId} post={post} />
+        ))}
 
-          {posts.length === 0 && (
-            <div className="post-schedule-empty-state">
-              <p className="post-schedule-empty-text">게시물이 없습니다</p>
-            </div>
-          )}
-        </div>
-      )}
+        {!loading && !error && posts.length === 0 && (
+          <div className="post-schedule-empty-state">
+            <p className="post-schedule-empty-text">게시물이 없습니다</p>
+          </div>
+        )}
+
+        <Footer />
+      </div>
     </div>
   );
 }

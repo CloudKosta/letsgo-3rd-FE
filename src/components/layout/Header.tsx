@@ -1,7 +1,7 @@
 import type { HeaderButtonProp } from './HeaderButton';
-import { LogInIcon, LogOutIcon, ChevronLeft } from 'lucide-react';
+import { LogInIcon, LogOutIcon } from 'lucide-react';
 import HeaderButton from './HeaderButton';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 
 function Header() {
@@ -9,9 +9,6 @@ function Header() {
     const user = useAuthStore((s) => s.user);
     const logout = useAuthStore((s) => s.logout);
     const navigate = useNavigate();
-    const location = useLocation();
-
-    const isUserPage = location.pathname.startsWith('/user');
 
     const handleLogout = () => {
         logout();
@@ -26,18 +23,13 @@ function Header() {
     return (
         <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 px-4 flex items-center justify-between z-50">
             <div className="flex items-center gap-2">
-                <a href="/" className="font-bold text-xl tracking-tight text-blue-600">
-                    LetsGo
+                <a href="/" className="flex items-center hover:opacity-90 transition-opacity">
+                    <img
+                        src="/letsgo-logo-v5.png"
+                        alt="LetsGO"
+                        className="h-[40px] w-auto object-contain"
+                    />
                 </a>
-                {isUserPage && (
-                    <button
-                        onClick={() => navigate(-1)}
-                        className="p-1 hover:bg-gray-100 rounded-full transition-colors ml-1"
-                        aria-label="뒤로가기"
-                    >
-                        <ChevronLeft className="w-6 h-6 text-gray-700" />
-                    </button>
-                )}
             </div>
 
             <div className="flex items-center gap-2">
