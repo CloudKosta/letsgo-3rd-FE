@@ -44,7 +44,7 @@ export function usePostScheduleList({
       } catch {
         if (!ignore) {
           setPosts([]);
-          setError("로그인 후 확인해보세요.");
+          setError("로그인을 하여 내 게시물을 확인해보세요.");
         }
       } finally {
         if (!ignore) setLoading(false);
