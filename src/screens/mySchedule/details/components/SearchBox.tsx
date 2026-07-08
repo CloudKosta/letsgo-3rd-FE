@@ -43,9 +43,6 @@ function SearchBox({ value, onChange, onSearch}: SearchBoxProps) {
                     </button>
                 )}
             </div>
-            <button className={styles.submitBtn} onClick={submit}>
-                검색
-            </button>
         </div>
     );
 }
