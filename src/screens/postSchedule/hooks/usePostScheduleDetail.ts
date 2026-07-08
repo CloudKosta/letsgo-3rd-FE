@@ -37,7 +37,7 @@ export function usePostScheduleDetail(postId?: string) {
       } catch {
         if (!ignore) {
           setDetail(null);
-          setError("게시물을 불러오지 못했습니다.");
+          setError("로그인 후 확인해보세요.");
         }
       } finally {
         if (!ignore) setLoading(false);
@@ -54,6 +54,6 @@ export function usePostScheduleDetail(postId?: string) {
   return {
     detail: postId ? detail : null,
     loading,
-    error: postId ? error : "게시물 정보를 찾을 수 없습니다.",
+    error: postId ? error : "로그인 후 확인해보세요.",
   };
 }

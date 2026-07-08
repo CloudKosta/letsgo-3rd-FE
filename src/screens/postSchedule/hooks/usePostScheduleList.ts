@@ -44,7 +44,7 @@ export function usePostScheduleList({
       } catch {
         if (!ignore) {
           setPosts([]);
-          setError("게시물을 불러오지 못했습니다.");
+          setError("로그인 후 확인해보세요.");
         }
       } finally {
         if (!ignore) setLoading(false);
