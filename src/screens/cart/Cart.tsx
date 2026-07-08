@@ -18,7 +18,7 @@ export default function Cart() {
                     {cartItems.length === 0 ? (
 
                         <div className="text-gray-400 text-center py-12 text-sm">
-                            장소를 선택해주세요.
+                            장소를 추가하여 일정을 만들어 보세요.
                         </div>
                     ) : (
 

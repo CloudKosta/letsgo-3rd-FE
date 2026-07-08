@@ -70,19 +70,21 @@ export default function PlaceBox({ place }: PlaceBoxProps) {
                     <span className="truncate">{place.addr1 || "주소 없음"}</span>
                 </div>
 
-                <h3 className="place-box-title truncate" title={place.title}>
-                    {place.title}
-                </h3>
+                <div className="place-box-title-wrapper">
+                    <h3 className="place-box-title truncate" title={place.title}>
+                        {place.title}
+                    </h3>
 
-                <button
-                    className="place-box-add-button"
-                    onClick={() => {
-                        addToCart(place);
-                    }}
-                >
-                    <SquarePlus className="place-box-add-icon" />
-                    담기
-                </button>
+                    <button
+                        className="place-box-add-button"
+                        onClick={() => {
+                            addToCart(place);
+                        }}
+                    >
+                        <SquarePlus className="place-box-add-icon" />
+                        담기
+                    </button>
+                </div>
 
             </div>
         </div>
