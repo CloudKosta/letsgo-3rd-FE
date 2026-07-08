@@ -35,10 +35,6 @@ function GetId() {
 
     return (
         <div className="user-form-container">
-            <div className="user-form-header">
-                <h2 className="user-form-title">아이디 찾기</h2>
-            </div>
-
             <p className="getid-description">
                 가입 시 등록한 이름과 이메일 주소를 입력해 주시면 아이디를 조회해 드립니다.
             </p>
@@ -48,7 +44,6 @@ function GetId() {
                     label="이름"
                     id="nameInput"
                     name="name"
-                    placeholder="이름을 입력하세요"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
@@ -57,7 +52,6 @@ function GetId() {
                     id="emailInput"
                     name="email"
                     type="email"
-                    placeholder="이메일을 입력하세요"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />

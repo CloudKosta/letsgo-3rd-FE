@@ -3,6 +3,7 @@ import { api } from "../../api/axiosInstance";
 import SearchInput from "./SearchInput";
 import LookupTable from "./LookupTable";
 import PlaceBox from "./PlaceBox";
+import Footer from "../../components/layout/Footer";
 import type { PlaceDTO, TabType } from "./interface";
 import "./Place.css";
 
@@ -58,15 +59,38 @@ export default function Place() {
     const [hasMore, setHasMore] = useState<boolean>(true);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const observerRef = useRef<HTMLDivElement | null>(null);
-
-
-    useEffect(() => {
-        setPlaces([]);
-        setPage(1);
-        setHasMore(true);
-    }, [currentTab, selectedMajor, selectedSub, keyword]);
+    const prevQueryRef = useRef({ currentTab, selectedMajor, selectedSub, keyword });
 
     useEffect(() => {
+        const queryChanged =
+            prevQueryRef.current.currentTab !== currentTab ||
+            prevQueryRef.current.selectedMajor !== selectedMajor ||
+            prevQueryRef.current.selectedSub !== selectedSub ||
+            prevQueryRef.current.keyword !== keyword;
+
+        let activePage = page;
+
+        if (queryChanged) {
+
+            prevQueryRef.current = { currentTab, selectedMajor, selectedSub, keyword };
+
+
+            setPlaces([]);
+            setHasMore(true);
+
+            if (page !== 1) {
+
+                setPage(1);
+                return;
+            } else {
+                activePage = 1;
+            }
+        }
+
+        if (!queryChanged && !hasMore) return;
+        if (isLoading) return;
+        setIsLoading(true);
+
         let endpoint = "/list/leisure";
         if (currentTab === 'STAY') {
             endpoint = "/list/stay";
@@ -81,14 +105,11 @@ export default function Place() {
             categoryCode = MAJOR_CODE_MAP[selectedMajor] || null;
         }
 
-        if (!hasMore || isLoading) return;
-        setIsLoading(true);
-
         api.get(endpoint, {
             params: {
                 category: categoryCode,
                 keyword: keyword || null,
-                page: page,
+                page: activePage,
                 sortOrder: currentTab === 'LEISURE' ? 'distance' : 'name'
             }
         })
@@ -98,7 +119,7 @@ export default function Place() {
                 const totalPages = response.data.totalPages;
 
                 setPlaces(prev => {
-                    if (page === 1) {
+                    if (activePage === 1) {
                         return newPlaces;
                     }
                     const existingIds = new Set(prev.map(p => p.placeId));
@@ -164,6 +185,8 @@ export default function Place() {
                     {isLoading ? "불러오는 중..." : "더 불러오기"}
                 </div>
             )}
+            
+            <Footer />
         </div>
     );
 }

@@ -46,16 +46,11 @@ function Signup() {
 
     return (
         <div className="signup-container">
-            <div className="user-form-header">
-                <h2 className="user-form-title">회원가입</h2>
-            </div>
-
             <form onSubmit={handleSubmit}>
                 <Input
                     label="이름"
                     id="nameInput"
                     name="name"
-                    placeholder="이름"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
@@ -63,7 +58,6 @@ function Signup() {
                     label="아이디"
                     id="idInput"
                     name="userID"
-                    placeholder="아이디"
                     value={userID}
                     onChange={(e) => setUserID(e.target.value)}
                 />
@@ -72,7 +66,6 @@ function Signup() {
                     id="emailInput"
                     name="email"
                     type="email"
-                    placeholder="이메일"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -81,7 +74,6 @@ function Signup() {
                     id="pwInput"
                     name="password"
                     type="password"
-                    placeholder="비밀번호"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -90,7 +82,6 @@ function Signup() {
                     id="pwConfirmInput"
                     name="passwordConfirm"
                     type="password"
-                    placeholder="비밀번호 확인"
                     value={passwordConfirm}
                     onChange={(e) => setPasswordConfirm(e.target.value)}
                 />
