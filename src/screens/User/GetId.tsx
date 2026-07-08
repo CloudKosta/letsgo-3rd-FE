@@ -44,7 +44,6 @@ function GetId() {
                     label="이름"
                     id="nameInput"
                     name="name"
-                    placeholder="이름을 입력하세요"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
@@ -53,7 +52,6 @@ function GetId() {
                     id="emailInput"
                     name="email"
                     type="email"
-                    placeholder="이메일을 입력하세요"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
