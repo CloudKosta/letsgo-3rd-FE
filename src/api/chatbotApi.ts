@@ -20,17 +20,28 @@ export interface ChatLogList {
 
 const SESSION_KEY = "chatbot_session_id";
 
+function generateUUID(): string {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 export function getSessionId(): string {
   let id = sessionStorage.getItem(SESSION_KEY);
   if (!id) {
-    id = crypto.randomUUID();
+    id = generateUUID();
     sessionStorage.setItem(SESSION_KEY, id);
   }
   return id;
 }
 
 export function resetSessionId(): string {
-  const id = crypto.randomUUID();
+  const id = generateUUID();
   sessionStorage.setItem(SESSION_KEY, id);
   return id;
 }
